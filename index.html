@@ -25,10 +25,11 @@
       --text-muted: #6B7A99;
       --text-light: #A0AEC0;
 
-      --divisi-rnd:    #3B82F6;
+      --divisi-rnd:    #800080;
       --divisi-comdev: #F59E0B;
       --divisi-hrd:    #EF4444;
-      --divisi-pr:     #10B981;
+      --divisi-pr:     #00FFFF;
+      --divisi-pi:     #3B82F6;
 
       --jabatan-koor:   #EF4444;
       --jabatan-staf:   #6366F1;
@@ -554,11 +555,13 @@
     .div-comdev { background: var(--divisi-comdev); }
     .div-hrd    { background: var(--divisi-hrd); }
     .div-pr     { background: var(--divisi-pr); }
+    .div-pi     { background: var(--divisi-pi); }
 
     .div-rnd-text    { color: var(--divisi-rnd); }
     .div-comdev-text { color: var(--divisi-comdev); }
     .div-hrd-text    { color: var(--divisi-hrd); }
     .div-pr-text     { color: var(--divisi-pr); }
+    .div-pi-text     { color: var(--divisi-pi); }
 
     .jab-koor   { background: rgba(239,68,68,.12); color: #B91C1C; }
     .jab-staf   { background: rgba(99,102,241,.12); color: #4338CA; }
@@ -628,6 +631,10 @@
   <div class="stat-item">
     <span class="stat-dot div-pr"></span>
     <span>Public Relations <strong id="cnt-pr">—</strong></span>
+  </div>
+    <div class="stat-item">
+    <span class="stat-dot div-pi"></span>
+    <span>Pengurus Inti <strong id="cnt-pi">—</strong></span>
   </div>
 </div>
 
@@ -720,6 +727,7 @@ function divisiClass(d) {
   if (d.includes('Community'))  return 'comdev';
   if (d.includes('Human'))      return 'hrd';
   if (d.includes('Public'))     return 'pr';
+  if (d.includes('Inti'))       return 'pi';
   return 'rnd';
 }
 function divisiShort(d) {
@@ -727,6 +735,7 @@ function divisiShort(d) {
   if (d.includes('Community'))  return 'ComDev';
   if (d.includes('Human'))      return 'HRD';
   if (d.includes('Public'))     return 'PR';
+  if (d.includes('Inti'))     return 'PI';
   return d;
 }
 function jabatanClass(j) {
@@ -759,12 +768,13 @@ function loadData() {
 }
 
 function updateStats() {
-  const counts = { rnd: 0, comdev: 0, hrd: 0, pr: 0 };
+  const counts = { rnd: 0, comdev: 0, hrd: 0, pr: 0 , pi: 0 };
   allMembers.forEach(m => { counts[divisiClass(m.divisi)]++; });
   document.getElementById('cnt-rnd').textContent    = counts.rnd;
   document.getElementById('cnt-comdev').textContent = counts.comdev;
   document.getElementById('cnt-hrd').textContent    = counts.hrd;
   document.getElementById('cnt-pr').textContent     = counts.pr;
+  document.getElementById('cnt-pi').textContent     = counts.pi;
 }
 
 // ── SEARCH ───────────────────────────────────────────────────────────────────
