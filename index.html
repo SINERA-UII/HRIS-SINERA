@@ -119,11 +119,96 @@
       letter-spacing: .01em;
     }
 
+    /* ── SEARCH ROW (search + filter side-by-side) ── */
+    .search-row {
+      display: flex;
+      align-items: stretch;
+      gap: 10px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
     /* ── SEARCH BOX ── */
     .search-wrapper {
       position: relative;
-      max-width: 640px;
-      margin: 0 auto;
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* ── FILTER SELECT ── */
+    .filter-select-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+    /* chevron overlay */
+    .filter-select-wrap::after {
+      content: '';
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid rgba(255,255,255,.75);
+      pointer-events: none;
+    }
+    #filterDivisi {
+      appearance: none;
+      -webkit-appearance: none;
+      height: 100%;
+      padding: 0 38px 0 16px;
+      border: 2px solid rgba(200,150,62,.45);
+      border-radius: 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      background: rgba(255,255,255,.13);
+      color: var(--white);
+      cursor: pointer;
+      outline: none;
+      min-width: 155px;
+      transition: border-color .2s, background .2s, box-shadow .2s;
+      box-shadow: 0 8px 40px rgba(0,0,0,.25);
+    }
+    #filterDivisi option {
+      background: #112240;   /* navy-mid agar terbaca di semua OS */
+      color: #ffffff;
+      font-weight: 500;
+    }
+    #filterDivisi:hover,
+    #filterDivisi:focus {
+      border-color: var(--gold);
+      background: rgba(200,150,62,.18);
+      box-shadow: 0 8px 40px rgba(0,0,0,.25), 0 0 0 3px rgba(200,150,62,.18);
+    }
+    /* Gold solid saat filter aktif */
+    #filterDivisi.has-filter {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--navy);
+    }
+    #filterDivisi.has-filter + .filter-select-wrap::after { display: none; }
+
+    /* Group heading di dalam daftar hasil */
+    .group-heading {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 22px 0 10px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .group-heading:first-child { margin-top: 0; }
+    .group-heading::after { content: ''; flex: 1; height: 1px; background: var(--cream-dark); }
+    .gh-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .gh-count { font-weight: 400; opacity: .55; }
+
+    @media (max-width: 600px) {
+      .search-row { flex-direction: column; }
+      #filterDivisi { width: 100%; height: 50px; }
     }
     .search-icon {
       position: absolute;
@@ -605,12 +690,32 @@
   <h1>HRIS <span>Kepengurusan</span><br>Sinergi Riset Pengabdian dan Dakwah Mahasiswa</h1>
   <p class="hero-sub">Human Resource Information System · Cari anggota pengurus berdasarkan nama</p>
 
-  <div class="search-wrapper">
-    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-    </svg>
-    <input id="searchInput" type="text" placeholder="Ketik nama anggota pengurus…" autocomplete="off" spellcheck="false" />
-    <button class="clear-btn" id="clearBtn" title="Hapus pencarian">✕</button>
+  <div class="search-row">
+    <div class="search-wrapper">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input id="searchInput" type="text" placeholder="Ketik nama anggota pengurus…" autocomplete="off" spellcheck="false" />
+      <button class="clear-btn" id="clearBtn" title="Hapus pencarian">✕</button>
+    </div>
+
+    <!--
+      ═══════════════════════════════════════════════════════
+      FILTER DIVISI  —  id="filterDivisi"
+      Value setiap <option> harus cocok (includes) dengan
+      properti "divisi" di data.js agar filter bekerja.
+      ═══════════════════════════════════════════════════════
+    -->
+    <div class="filter-select-wrap">
+      <select id="filterDivisi" title="Filter berdasarkan divisi">
+        <option value="">⊞ Semua Divisi</option>
+        <option value="Research and Development">R&amp;D</option>
+        <option value="Community Development">ComDev</option>
+        <option value="Human Resource Development">HRD</option>
+        <option value="Public Relations">PR</option>
+        <option value="Pengurus Inti">Pengurus Inti</option>
+      </select>
+    </div>
   </div>
 </header>
 
@@ -693,7 +798,7 @@
 
       <!-- PJ Proker -->
       <div class="proker-section">
-        <div class="proker-label" style="color: #B91C1C;">⚑ Penanggung Jawab (PJ) Proker</div>
+        <div class="proker-label" style="color: #B91C1C;">⚑ Penanggung Jawab Proker</div>
         <div class="pills" id="mPjProker"></div>
       </div>
 
@@ -777,72 +882,194 @@ function updateStats() {
   document.getElementById('cnt-pi').textContent     = counts.pi;
 }
 
-// ── SEARCH ───────────────────────────────────────────────────────────────────
+// ── SEARCH + FILTER ─────────────────────────────────────────────────────────
 const searchInput  = document.getElementById('searchInput');
 const clearBtn     = document.getElementById('clearBtn');
+const filterDivisi = document.getElementById('filterDivisi');
 const emptyState   = document.getElementById('emptyState');
 const resultsArea  = document.getElementById('resultsArea');
 const resultsList  = document.getElementById('resultsList');
 const resultCount  = document.getElementById('resultCount');
 const resultKeyword= document.getElementById('resultKeyword');
 
+// State: kedua filter dikelola lewat satu fungsi render
+let activeFilter = '';  // kosong = tampilkan semua divisi
+
+// ── Event: ketik di search bar ────────────────────────────────────────────
 searchInput.addEventListener('input', () => {
   const q = searchInput.value.trim();
   clearBtn.classList.toggle('visible', q.length > 0);
-  if (!q) { showEmpty(); return; }
-  performSearch(q);
+  renderResults();
 });
 
 clearBtn.addEventListener('click', () => {
   searchInput.value = '';
   clearBtn.classList.remove('visible');
   searchInput.focus();
-  showEmpty();
+  renderResults();
 });
+
+// ── Event: pilih divisi di <select id="filterDivisi"> ─────────────────────
+filterDivisi.addEventListener('change', () => {
+  activeFilter = filterDivisi.value;   // "" | "Research and Development" | dll.
+
+  // Beri visual gold saat filter aktif
+  filterDivisi.classList.toggle('has-filter', activeFilter !== '');
+
+  console.log('[HRIS] allMembers saat filter dijalankan:', allMembers);
+  console.log('[HRIS] Filter dipilih:', activeFilter || '(semua)');
+
+  renderResults();
+});
+
+// ── Fungsi utama: satu sumber kebenaran tampilan ──────────────────────────
+/**
+ * renderResults()
+ * Menggabungkan dua filter secara bersamaan:
+ *   1. activeFilter  → filter berdasarkan divisi (dari <select>)
+ *   2. activeQuery   → filter berdasarkan nama   (dari searchInput)
+ *
+ * Jika filter divisi aktif  → tampilkan terurut Koordinator → Staf Ahli → Anggota
+ * Jika hanya search          → tampilkan datar (seperti semula)
+ * Jika keduanya kosong       → kembalikan ke empty state
+ */
+function renderResults() {
+  const activeQuery = searchInput.value.trim();
+
+  // Tidak ada filter maupun query → tampilkan panduan
+  if (!activeFilter && !activeQuery) {
+    showEmpty();
+    return;
+  }
+
+  // ── 1. Filter divisi (fleksibel: toLowerCase + includes) ─────────────────
+  let pool = allMembers;
+  if (activeFilter) {
+    const fLow = activeFilter.toLowerCase();
+    pool = allMembers.filter(m =>
+      m.divisi && m.divisi.toLowerCase().includes(fLow)
+    );
+    console.log('[HRIS] Hasil filter divisi "' + activeFilter + '":', pool.length, 'anggota');
+  }
+
+  // ── 2. Filter nama (jika ada query) ──────────────────────────────────────
+  if (activeQuery) {
+    const qLow = activeQuery.toLowerCase();
+    pool = pool.filter(m => m.nama && m.nama.toLowerCase().includes(qLow));
+    console.log('[HRIS] Hasil filter nama "' + activeQuery + '":', pool.length, 'anggota');
+  }
+
+  // ── 3. Tampilkan area hasil ───────────────────────────────────────────────
+  emptyState.style.display = 'none';
+  resultsArea.style.display = '';
+  resultCount.textContent = pool.length;
+
+  // Update label keyword
+  if (activeQuery) {
+    resultKeyword.textContent = `"${activeQuery}"`;
+    resultKeyword.style.display = '';
+  } else {
+    resultKeyword.textContent = '';
+    resultKeyword.style.display = 'none';
+  }
+
+  // ── 4. Render kartu ──────────────────────────────────────────────────────
+  if (pool.length === 0) {
+    resultsList.innerHTML = `<div class="no-results"><strong>Anggota tidak ditemukan</strong>Coba ganti kata kunci atau pilih divisi lain.</div>`;
+    return;
+  }
+
+  if (activeFilter) {
+    // Kelompokkan berdasarkan jabatan
+    renderGrouped(pool, activeQuery);
+  } else {
+    // Tampilkan datar (perilaku search lama)
+    renderFlat(pool, activeQuery);
+  }
+}
+
+// Urutan dan warna titik untuk setiap kelompok jabatan
+const JABATAN_GROUPS = [
+  { label: 'Koordinator',    dot: '#B91C1C' },
+  { label: 'Staf Ahli',      dot: '#4338CA' },
+  { label: 'Anggota Divisi', dot: '#475569' },
+];
+
+function renderGrouped(members, query) {
+  // Pisahkan anggota ke dalam grup
+  const map = {};
+  JABATAN_GROUPS.forEach(g => { map[g.label] = []; });
+
+  members.forEach(m => {
+    const key = map[m.jabatan] !== undefined ? m.jabatan : 'Anggota Divisi';
+    map[key].push(m);
+  });
+
+  resultsList.innerHTML = '';
+  let idx = 0;
+
+  JABATAN_GROUPS.forEach(({ label, dot }) => {
+    const group = map[label];
+    if (!group || group.length === 0) return;
+
+    // Heading grup
+    const heading = document.createElement('div');
+    heading.className = 'group-heading';
+    heading.innerHTML = `
+      <span class="gh-dot" style="background:${dot}"></span>
+      ${label} <span class="gh-count">(${group.length})</span>`;
+    resultsList.appendChild(heading);
+
+    // Kartu anggota
+    group.forEach(m => {
+      resultsList.appendChild(buildCard(m, idx++, query));
+    });
+  });
+}
+
+function renderFlat(members, query) {
+  resultsList.innerHTML = '';
+  members.forEach((m, i) => {
+    resultsList.appendChild(buildCard(m, i, query));
+  });
+}
+
+function buildCard(m, index, query) {
+  const dc   = divisiClass(m.divisi);
+  const card = document.createElement('div');
+  card.className = 'member-card';
+  card.style.animationDelay = `${Math.min(index, 15) * 25}ms`;
+  card.innerHTML = `
+    <div class="member-avatar div-${dc}">${initials(m.nama)}</div>
+    <div class="member-info">
+      <div class="member-name">${highlight(m.nama, query)}</div>
+      <div class="member-meta">
+        <span>${m.angkatan}</span>
+        <span class="meta-sep">·</span>
+        <span>${m.prodi}</span>
+      </div>
+    </div>
+    <div class="member-right">
+      <span class="badge-divisi div-${dc}">${divisiShort(m.divisi)}</span>
+      <span class="badge-jabatan">${m.jabatan}</span>
+    </div>
+    <span class="card-arrow">›</span>`;
+  card.addEventListener('click', () => openModal(m));
+  return card;
+}
 
 function showEmpty() {
   emptyState.style.display = '';
   resultsArea.style.display = 'none';
 }
 
-function performSearch(q) {
-  const lower = q.toLowerCase();
-  const results = allMembers.filter(m => m.nama.toLowerCase().includes(lower));
-
-  emptyState.style.display = 'none';
-  resultsArea.style.display = '';
-  resultCount.textContent = results.length;
-  resultKeyword.textContent = `"${q}"`;
-
-  if (results.length === 0) {
-    resultsList.innerHTML = `<div class="no-results"><strong>Anggota tidak ditemukan</strong>Coba periksa ejaan nama yang Anda cari.</div>`;
-    return;
-  }
-
-  resultsList.innerHTML = '';
-  results.forEach((m, i) => {
-    const dc = divisiClass(m.divisi);
-    const card = document.createElement('div');
-    card.className = 'member-card';
-    card.style.animationDelay = `${i * 30}ms`;
-    card.innerHTML = `
-      <div class="member-avatar div-${dc}">${initials(m.nama)}</div>
-      <div class="member-info">
-        <div class="member-name">${highlight(m.nama, q)}</div>
-        <div class="member-meta">
-          <span>${m.angkatan}</span>
-          <span class="meta-sep">·</span>
-          <span>${m.prodi}</span>
-        </div>
-      </div>
-      <div class="member-right">
-        <span class="badge-divisi div-${dc}">${divisiShort(m.divisi)}</span>
-        <span class="badge-jabatan">${m.jabatan}</span>
-      </div>
-      <span class="card-arrow">›</span>`;
-    card.addEventListener('click', () => openModal(m));
-    resultsList.appendChild(card);
-  });
+// ── Fungsi publik: bisa dipanggil dari luar (mis. dari stats bar) ─────────
+function filterByDivision(divisiName) {
+  activeFilter = divisiName;
+  filterDivisi.value = divisiName;
+  filterDivisi.classList.toggle('has-filter', divisiName !== '');
+  console.log('[HRIS] filterByDivision() dipanggil:', divisiName || '(reset)');
+  renderResults();
 }
 
 // ── MODAL ────────────────────────────────────────────────────────────────────
