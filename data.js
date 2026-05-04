@@ -18,12 +18,160 @@ const membersData = [
     ]
   },
   {
+    "nama": "Azka Rachmat Fasya",
+    "nim": "23320229",
+    "angkatan": "2023",
+    "prodi": "Psikologi",
+    "divisi": "Pengurus Inti",
+    "jabatan": "Ketua Umum",
+    "pj_proker": [],
+    "koor_proker": [],
+    "anggota_proker": []
+  },
+  {
+    "nama": "Syawal Zuhry El Barqhowi",
+    "nim": "23513065",
+    "angkatan": "2023",
+    "prodi": "Teknik Lingkungan",
+    "divisi": "Pengurus Inti",
+    "jabatan": "Wakil Ketua Umum",
+    "pj_proker": [],
+    "koor_proker": [],
+    "anggota_proker": []
+  },
+  {
+    "nama": "Elena Shafa' Salsabila",
+    "nim": "23613217",
+    "angkatan": "2023",
+    "prodi": "Farmasi",
+    "divisi": "Pengurus Inti",
+    "jabatan": "Sekretaris Umum",
+    "pj_proker": [],
+    "koor_proker": [],
+    "anggota_proker": []
+  },
+  {
+    "nama": "Tiara Safa Rasendriya",
+    "nim": "24320307",
+    "angkatan": "2024",
+    "prodi": "Psikologi",
+    "divisi": "Pengurus Inti",
+    "jabatan": "Wakil Sekretaris Umum",
+    "pj_proker": [],
+    "koor_proker": [],
+    "anggota_proker": []
+  }, 
+  {
+    "nama": "Alwan Chandra Ririh Adhyaksa",
+    "nim": "23511094",
+    "angkatan": "2023",
+    "prodi": "Teknik Sipil",
+    "divisi": "Pengurus Inti",
+    "jabatan": "Bendahara Umum",
+    "pj_proker": [],
+    "koor_proker": [],
+    "anggota_proker": []
+  },
+  {
+    "nama": "Salma Nurbayani",
+    "nim": "24611063",
+    "angkatan": "2024",
+    "prodi": "Statistika",
+    "divisi": "Pengurus Inti",
+    "jabatan": "Wakil Bendahara Umum",
+    "pj_proker": [],
+    "koor_proker": [],
+    "anggota_proker": []
+  },
+  {
+    "nama": "Wafiq Rahma Aulia Putri",
+    "nim": "23611100",
+    "angkatan": "2023",
+    "prodi": "Statistika",
+    "divisi": "Research and Development",
+    "jabatan": "Koordinator",
+    "pj_proker": [],
+    "koor_proker": [],
+    "anggota_proker": []
+  },
+    {
+    "nama": "Muhammad Rifqi Syarif",
+    "nim": "24613222",
+    "angkatan": "2024",
+    "prodi": "Farmasi (IP)",
+    "divisi": "Research and Development",
+    "jabatan": "Staf Ahli",
+    "pj_proker": [],
+    "koor_proker": [],
+    "anggota_proker": []
+  },  {
+    "nama": "Syahila Najwa",
+    "nim": "23320226",
+    "angkatan": "2023",
+    "prodi": "Statistika",
+    "divisi": "Community Development",
+    "jabatan": "Koordinator",
+    "pj_proker": [],
+    "koor_proker": [],
+    "anggota_proker": []
+  },  {
+    "nama": "Roisul Umdy Annajih",
+    "nim": "24410575",
+    "angkatan": "2024",
+    "prodi": "Hukum",
+    "divisi": "Community Development",
+    "jabatan": "Staf Ahli",
+    "pj_proker": [],
+    "koor_proker": [],
+    "anggota_proker": []
+  },  {
+    "nama": "Lani Nurrahmah",
+    "nim": "23320309",
+    "angkatan": "2023",
+    "prodi": "Psikologi",
+    "divisi": "Public Relations",
+    "jabatan": "Koordinator",
+    "pj_proker": [],
+    "koor_proker": [],
+    "anggota_proker": []
+  },  {
+    "nama": "Aulira Rahmi Anum",
+    "nim": "23523140",
+    "angkatan": "2023",
+    "prodi": "Informatika",
+    "divisi": "Public Relations",
+    "jabatan": "Staf Ahli",
+    "pj_proker": [],
+    "koor_proker": [],
+    "anggota_proker": []
+  },  {
+    "nama": "Diah Nur Antika",
+    "nim": "23423032",
+    "angkatan": "2023",
+    "prodi": "Ekonomi Islam",
+    "divisi": "Human Resource Development",
+    "jabatan": "Koordinator",
+    "pj_proker": [],
+    "koor_proker": [],
+    "anggota_proker": []
+  },  {
+    "nama": "Razifa Haryatno",
+    "nim": "24613160",
+    "angkatan": "2024",
+    "prodi": "Farmasi",
+    "divisi": "Human Resource Development",
+    "jabatan": "Staf Ahli",
+    "pj_proker": [],
+    "koor_proker": [],
+    "anggota_proker": []
+  },    
+  {
     "nama": "Yulia Kartika",
     "nim": "24231019",
     "angkatan": "2024",
-    "prodi": "ANALISIS KIMIA",
+    "prodi": "Analisis Kimia",
     "divisi": "Research and Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "PRP"
     ],
@@ -38,7 +186,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Pendidikan Kimia",
     "divisi": "Research and Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "LSF"
     ],
@@ -53,7 +201,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Teknik Industri",
     "divisi": "Research and Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SP"
     ],
@@ -66,7 +214,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Teknik Kimia",
     "divisi": "Research and Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SP"
     ],
@@ -83,7 +231,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Farmasi",
     "divisi": "Research and Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "LSF"
     ],
@@ -100,7 +248,7 @@ const membersData = [
     "angkatan": "2023",
     "prodi": "Farmasi",
     "divisi": "Research and Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SP"
     ],
@@ -115,7 +263,7 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Informatika",
     "divisi": "Research and Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "LSF"
     ],
@@ -130,7 +278,7 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Ekonomi Islam",
     "divisi": "Research and Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "LSF"
     ],
@@ -145,7 +293,7 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Ahwal Al-Syakhshiyah",
     "divisi": "Research and Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "LSF"
     ],
@@ -160,7 +308,7 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Farmasi",
     "divisi": "Research and Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "PRP"
     ],
@@ -175,7 +323,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Kedokteran",
     "divisi": "Research and Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SP"
     ],
@@ -190,7 +338,7 @@ const membersData = [
     "angkatan": "2023",
     "prodi": "Statistika",
     "divisi": "Research and Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "PRP"
     ],
@@ -206,7 +354,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Statistika",
     "divisi": "Research and Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "LSF"
     ],
@@ -223,7 +371,7 @@ const membersData = [
     "angkatan": "2023",
     "prodi": "Pendidikan Agama Islam",
     "divisi": "Community Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "PM"
     ],
@@ -238,7 +386,7 @@ const membersData = [
     "angkatan": "2023",
     "prodi": "Pendidikan Kimia",
     "divisi": "Community Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SI CARE"
     ],
@@ -251,7 +399,7 @@ const membersData = [
     "angkatan": "2023",
     "prodi": "Psikologi",
     "divisi": "Community Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SAPA"
     ],
@@ -264,7 +412,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Psikologi",
     "divisi": "Community Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SAPA"
     ],
@@ -279,7 +427,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Informatika IP",
     "divisi": "Community Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "PPKO"
     ],
@@ -292,7 +440,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Farmasi",
     "divisi": "Community Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SAPA",
       "LSF"
@@ -306,7 +454,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Teknik Lingkungan",
     "divisi": "Community Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "PPKO"
     ],
@@ -321,7 +469,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Teknik Sipil",
     "divisi": "Community Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [],
     "koor_proker": [
       "SI CARE"
@@ -336,7 +484,7 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Arsitektur",
     "divisi": "Community Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [],
     "koor_proker": [
       "SI CARE"
@@ -349,7 +497,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Akhwal Syakhsiyyah",
     "divisi": "Community Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [],
     "koor_proker": [
       "Sapa",
@@ -363,7 +511,7 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Psikologi",
     "divisi": "Community Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [],
     "koor_proker": [
       "Sapa"
@@ -378,7 +526,7 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Ekonomi Islam",
     "divisi": "Community Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SI CARE"
     ],
@@ -393,7 +541,7 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Ilmu Komunikasi",
     "divisi": "Community Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SI CARE"
     ],
@@ -406,7 +554,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Psikologi",
     "divisi": "Community Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [],
     "koor_proker": [
       "SI CARE",
@@ -422,7 +570,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Hukum",
     "divisi": "Community Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [],
     "koor_proker": [
       "Sapa"
@@ -435,7 +583,7 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Arsitektur",
     "divisi": "Community Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [],
     "koor_proker": [
       "SI CARE"
@@ -448,7 +596,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Pendidikan Bahasa Inggris",
     "divisi": "Human Resource Development",
-    "jabatan": "Koordinator",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SWF"
     ],
@@ -463,7 +611,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Pendidikan Kimia",
     "divisi": "Human Resource Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SWF"
     ],
@@ -478,7 +626,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Psikologi",
     "divisi": "Human Resource Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SWF"
     ],
@@ -495,7 +643,7 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Ekonomi Islam",
     "divisi": "Human Resource Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SERASI"
     ],
@@ -511,7 +659,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Statistika",
     "divisi": "Human Resource Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SERASI"
     ],
@@ -527,7 +675,7 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Teknik Sipil",
     "divisi": "Human Resource Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "ASF"
     ],
@@ -543,7 +691,7 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "HI",
     "divisi": "Human Resource Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SR"
     ],
@@ -560,9 +708,9 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Akuntansi Perpajakan",
     "divisi": "Human Resource Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
-      "RC"
+      "Reading Corner"
     ],
     "koor_proker": [
       "SR",
@@ -578,7 +726,7 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Informatika",
     "divisi": "Human Resource Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "ASF"
     ],
@@ -593,9 +741,9 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Akuntansi",
     "divisi": "Human Resource Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
-      "RC"
+      "Reading Corner"
     ],
     "koor_proker": [
       "SERASI"
@@ -608,7 +756,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Ahwal Al-Syakhshiyah",
     "divisi": "Human Resource Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SERASI"
     ],
@@ -623,7 +771,7 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Psikologi",
     "divisi": "Human Resource Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "ASF"
     ],
@@ -639,7 +787,7 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Ilmu Komunikasi",
     "divisi": "Human Resource Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SR"
     ],
@@ -656,9 +804,9 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Ilmu Komunikasi",
     "divisi": "Human Resource Development",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
-      "RC",
+      "Reading Corner",
       "SR"
     ],
     "koor_proker": [
@@ -674,7 +822,7 @@ const membersData = [
     "angkatan": "2023",
     "prodi": "Psikologi",
     "divisi": "Public Relations",
-    "jabatan": "Koordinator",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SCCA"
     ],
@@ -689,9 +837,9 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Ekonomi Islam",
     "divisi": "Public Relations",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
-      "Jurnal Khazanah"
+      "Publikasi Sosial Media"
     ],
     "koor_proker": [
       "Kunjungan Edukasi",
@@ -705,7 +853,7 @@ const membersData = [
     "angkatan": "2023",
     "prodi": "Ekonomi Islam",
     "divisi": "Public Relations",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SOH"
     ],
@@ -720,7 +868,7 @@ const membersData = [
     "angkatan": "2023",
     "prodi": "Psikologi",
     "divisi": "Public Relations",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "Kunjungan Edukasi"
     ],
@@ -735,7 +883,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Teknik Industri",
     "divisi": "Public Relations",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SCCA"
     ],
@@ -750,7 +898,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Akuntansi Perpajakan",
     "divisi": "Public Relations",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "Kunjungan Edukasi",
       "PPKO"
@@ -768,9 +916,9 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Ekonomi Islam",
     "divisi": "Public Relations",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
-      "Jurnal Khazanah"
+      "Publikasi Sosial Media"
     ],
     "koor_proker": [
       "SOH",
@@ -784,7 +932,7 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Hukum IP",
     "divisi": "Public Relations",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SOH"
     ],
@@ -799,9 +947,9 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Ilmu Komunikasi",
     "divisi": "Public Relations",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
-      "Publikasi (feed)"
+      "Publikasi Sosial Media"
     ],
     "koor_proker": [
       "SOH"
@@ -814,9 +962,9 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Ilmu Komunikasi",
     "divisi": "Public Relations",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
-      "Publikasi (linkeldn)",
+      "Publikasi Sosial Media",
       "PPKO"
     ],
     "koor_proker": [
@@ -830,9 +978,9 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Ahwal Syakhshiyah",
     "divisi": "Public Relations",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
-      "Publikasi (reels)"
+      "Publikasi Sosial Media"
     ],
     "koor_proker": [
       "SOH"
@@ -847,7 +995,7 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Farmasi IUP",
     "divisi": "Public Relations",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "SOH"
     ],
@@ -864,9 +1012,9 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Farmasi",
     "divisi": "Public Relations",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
-      "Jurnal Khazanah"
+      "Publikasi Sosial Media"
     ],
     "koor_proker": [
       "Kunjungan Edukasi",
@@ -880,12 +1028,11 @@ const membersData = [
     "angkatan": "2024",
     "prodi": "Rekayasa Tekstil",
     "divisi": "Public Relations",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
-      "Publikasi (story)"
+      "Publikasi Sosial Media"
     ],
     "koor_proker": [
-      "Publikasi",
       "LSF"
     ],
     "anggota_proker": []
@@ -896,9 +1043,9 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Statistika",
     "divisi": "Public Relations",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
-      "Publikasi (X)"
+      "Publikasi Sosial Media"
     ],
     "koor_proker": [
       "SCCA"
@@ -911,7 +1058,7 @@ const membersData = [
     "angkatan": "2025",
     "prodi": "Psikologi",
     "divisi": "Public Relations",
-    "jabatan": "Staf Ahli",
+    "jabatan": "Anggota",
     "pj_proker": [
       "Kunjungan Edukasi",
       "PPKO"
