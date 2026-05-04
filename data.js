@@ -1,23 +1,5 @@
 const membersData = [
   {
-    "nama": "Feroza Fahira",
-    "nim": "23323182",
-    "angkatan": "2023",
-    "prodi": "Hubungan Internasional",
-    "divisi": "Research and Development",
-    "jabatan": "Anggota",
-    "pj_proker": [
-      "PRP"
-    ],
-    "koor_proker": [],
-    "anggota_proker": [
-      "PPKO",
-      "Kunjungan Edukasi",
-      "SiCARE",
-      "Sinera Recruitment"
-    ]
-  },
-  {
     "nama": "Azka Rachmat Fasya",
     "nim": "23320229",
     "angkatan": "2023",
@@ -82,7 +64,7 @@ const membersData = [
     "pj_proker": [],
     "koor_proker": [],
     "anggota_proker": []
-  },
+  },  
   {
     "nama": "Wafiq Rahma Aulia Putri",
     "nim": "23611100",
@@ -94,7 +76,7 @@ const membersData = [
     "koor_proker": [],
     "anggota_proker": []
   },
-    {
+  {
     "nama": "Muhammad Rifqi Syarif",
     "nim": "24613222",
     "angkatan": "2024",
@@ -104,66 +86,24 @@ const membersData = [
     "pj_proker": [],
     "koor_proker": [],
     "anggota_proker": []
-  },  {
-    "nama": "Syahila Najwa",
-    "nim": "23320226",
+  },
+  {
+    "nama": "Feroza Fahira",
+    "nim": "23323182",
     "angkatan": "2023",
-    "prodi": "Statistika",
-    "divisi": "Community Development",
-    "jabatan": "Koordinator",
-    "pj_proker": [],
+    "prodi": "Hubungan Internasional",
+    "divisi": "Research and Development",
+    "jabatan": "Anggota",
+    "pj_proker": [
+      "PRP"
+    ],
     "koor_proker": [],
-    "anggota_proker": []
-  },  {
-    "nama": "Roisul Umdy Annajih",
-    "nim": "24410575",
-    "angkatan": "2024",
-    "prodi": "Hukum",
-    "divisi": "Community Development",
-    "jabatan": "Staf Ahli",
-    "pj_proker": [],
-    "koor_proker": [],
-    "anggota_proker": []
-  },  {
-    "nama": "Lani Nurrahmah",
-    "nim": "23320309",
-    "angkatan": "2023",
-    "prodi": "Psikologi",
-    "divisi": "Public Relations",
-    "jabatan": "Koordinator",
-    "pj_proker": [],
-    "koor_proker": [],
-    "anggota_proker": []
-  },  {
-    "nama": "Aulira Rahmi Anum",
-    "nim": "23523140",
-    "angkatan": "2023",
-    "prodi": "Informatika",
-    "divisi": "Public Relations",
-    "jabatan": "Staf Ahli",
-    "pj_proker": [],
-    "koor_proker": [],
-    "anggota_proker": []
-  },  {
-    "nama": "Diah Nur Antika",
-    "nim": "23423032",
-    "angkatan": "2023",
-    "prodi": "Ekonomi Islam",
-    "divisi": "Human Resource Development",
-    "jabatan": "Koordinator",
-    "pj_proker": [],
-    "koor_proker": [],
-    "anggota_proker": []
-  },  {
-    "nama": "Razifa Haryatno",
-    "nim": "24613160",
-    "angkatan": "2024",
-    "prodi": "Farmasi",
-    "divisi": "Human Resource Development",
-    "jabatan": "Staf Ahli",
-    "pj_proker": [],
-    "koor_proker": [],
-    "anggota_proker": []
+    "anggota_proker": [
+      "PPKO",
+      "Kunjungan Edukasi",
+      "SiCARE",
+      "Sinera Recruitment"
+    ]
   },    
   {
     "nama": "Yulia Kartika",
@@ -365,6 +305,27 @@ const membersData = [
       "ASF"
     ]
   },
+  {
+    "nama": "Syahila Najwa",
+    "nim": "23320226",
+    "angkatan": "2023",
+    "prodi": "Psikologi",
+    "divisi": "Community Development",
+    "jabatan": "Koordinator",
+    "pj_proker": [],
+    "koor_proker": [],
+    "anggota_proker": []
+  },  {
+    "nama": "Roisul Umdy Annajih",
+    "nim": "24410575",
+    "angkatan": "2024",
+    "prodi": "Hukum",
+    "divisi": "Community Development",
+    "jabatan": "Staf Ahli",
+    "pj_proker": [],
+    "koor_proker": [],
+    "anggota_proker": []
+  },  
   {
     "nama": "Fakhma Mujahida",
     "nim": "23422029",
@@ -588,6 +549,28 @@ const membersData = [
     "koor_proker": [
       "SI CARE"
     ],
+    "anggota_proker": []
+  },
+  {
+    "nama": "Diah Nur Antika",
+    "nim": "23423032",
+    "angkatan": "2023",
+    "prodi": "Ekonomi Islam",
+    "divisi": "Human Resource Development",
+    "jabatan": "Koordinator",
+    "pj_proker": [],
+    "koor_proker": [],
+    "anggota_proker": []
+  },  
+  {
+    "nama": "Razifa Haryatno",
+    "nim": "24613160",
+    "angkatan": "2024",
+    "prodi": "Farmasi",
+    "divisi": "Human Resource Development",
+    "jabatan": "Staf Ahli",
+    "pj_proker": [],
+    "koor_proker": [],
     "anggota_proker": []
   },
   {
@@ -817,6 +800,28 @@ const membersData = [
     ]
   },
   {
+    "nama": "Lani Nurrahmah",
+    "nim": "23320309",
+    "angkatan": "2023",
+    "prodi": "Psikologi",
+    "divisi": "Public Relations",
+    "jabatan": "Koordinator",
+    "pj_proker": [],
+    "koor_proker": [],
+    "anggota_proker": []
+  },  
+  {
+    "nama": "Aulira Rahmi Anum",
+    "nim": "23523140",
+    "angkatan": "2023",
+    "prodi": "Informatika",
+    "divisi": "Public Relations",
+    "jabatan": "Staf Ahli",
+    "pj_proker": [],
+    "koor_proker": [],
+    "anggota_proker": []
+  },
+  {
     "nama": "Agung Malik Ibrahim",
     "nim": "23320236",
     "angkatan": "2023",
@@ -993,7 +998,7 @@ const membersData = [
     "nama": "Rizkita Sabiya Kasyfa",
     "nim": "25613240",
     "angkatan": "2025",
-    "prodi": "Farmasi IUP",
+    "prodi": "Farmasi IP",
     "divisi": "Public Relations",
     "jabatan": "Anggota",
     "pj_proker": [
