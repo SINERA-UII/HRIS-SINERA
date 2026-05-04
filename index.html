@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HRIS Kepengurusan Sinergi Riset Pengabdian dan Dakwah Mahasiswa </title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #0A1628;
+      --navy-mid:   #112240;
+      --navy-soft:  #1A3158;
+      --gold:       #C8963E;
+      --gold-light: #E8B86D;
+      --cream:      #F8F4EE;
+      --cream-dark: #EDE7DB;
+      --white:      #FFFFFF;
+      --text-dark:  #1A1A2E;
+      --text-muted: #6B7A99;
+      --text-light: #A0AEC0;
+
+      --divisi-rnd:    #3B82F6;
+      --divisi-comdev: #F59E0B;
+      --divisi-hrd:    #EF4444;
+      --divisi-pr:     #10B981;
+
+      --jabatan-koor:   #EF4444;
+      --jabatan-staf:   #6366F1;
+      --jabatan-anggota:#64748B;
+
+      --pill-pj:       #DC2626;
+      --pill-koor:     #7C3AED;
+      --pill-anggota:  #0369A1;
+
+      --shadow-sm: 0 2px 8px rgba(10,22,40,.10);
+      --shadow-md: 0 8px 32px rgba(10,22,40,.18);
+      --shadow-lg: 0 24px 64px rgba(10,22,40,.30);
+      --radius:    14px;
+      --radius-sm: 8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+      padding: 64px 24px 80px;
+      text-align: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 20% 0%, rgba(200,150,62,.18) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 80% 100%, rgba(59,130,246,.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(200,150,62,.15);
+      border: 1px solid rgba(200,150,62,.35);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 20px;
+    }
+    .hero-badge::before { content: '◆'; font-size: 8px; }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 6vw, 3.8rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      margin-bottom: 12px;
+    }
+    .hero h1 span { color: var(--gold); }
+
+    .hero-sub {
+      color: rgba(255,255,255,.55);
+      font-size: 15px;
+      font-weight: 400;
+      margin-bottom: 44px;
+      letter-spacing: .01em;
+    }
+
+    /* ── SEARCH BOX ── */
+    .search-wrapper {
+      position: relative;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .search-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      width: 20px;
+      height: 20px;
+      pointer-events: none;
+      transition: color .2s;
+    }
+    #searchInput {
+      width: 100%;
+      padding: 18px 56px 18px 52px;
+      border: 2px solid transparent;
+      border-radius: 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      background: rgba(255,255,255,.96);
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      box-shadow: 0 8px 40px rgba(0,0,0,.35);
+    }
+    #searchInput:focus {
+      border-color: var(--gold);
+      box-shadow: 0 8px 40px rgba(0,0,0,.35), 0 0 0 4px rgba(200,150,62,.18);
+    }
+    #searchInput::placeholder { color: var(--text-muted); }
+
+    .clear-btn {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--cream-dark);
+      border: none;
+      border-radius: 6px;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 16px;
+      line-height: 1;
+      transition: background .15s, color .15s;
+    }
+    .clear-btn:hover { background: var(--cream); color: var(--text-dark); }
+    .clear-btn.visible { display: flex; }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--navy-mid);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,.60);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .stat-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .stat-item strong { color: var(--white); }
+
+    /* ── MAIN CONTENT ── */
+    .main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 36px 20px 80px;
+    }
+
+    /* ── EMPTY / DEFAULT STATE ── */
+    #emptyState {
+      text-align: center;
+      padding: 72px 24px;
+    }
+    .empty-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--cream-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 36px;
+    }
+    #emptyState h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    #emptyState p { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
+
+    /* ── RESULTS HEADER ── */
+    .results-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+    .results-count {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .results-count strong { color: var(--text-dark); }
+    .results-keyword {
+      background: rgba(200,150,62,.12);
+      color: var(--gold);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* ── MEMBER CARDS ── */
+    #resultsList { display: flex; flex-direction: column; gap: 12px; }
+
+    .member-card {
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,.07);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: transform .15s, box-shadow .15s, border-color .15s;
+      animation: slideIn .2s ease both;
+    }
+    .member-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--gold);
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .member-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+      flex-shrink: 0;
+      font-family: 'Playfair Display', serif;
+      letter-spacing: -.02em;
+    }
+
+    .member-info { flex: 1; min-width: 0; }
+    .member-name {
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .member-meta {
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .meta-sep { color: var(--text-light); }
+
+    .member-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .badge-divisi {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      padding: 3px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .badge-jabatan {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .card-arrow {
+      color: var(--text-light);
+      font-size: 18px;
+      margin-left: 8px;
+      flex-shrink: 0;
+      transition: transform .15s, color .15s;
+    }
+    .member-card:hover .card-arrow { transform: translateX(4px); color: var(--gold); }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10,22,40,.65);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: var(--white);
+      border-radius: 20px;
+      max-width: 560px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+      transform: scale(.94) translateY(16px);
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+    }
+    .modal-overlay.open .modal { transform: scale(1) translateY(0); }
+
+    /* Custom scrollbar */
+    .modal::-webkit-scrollbar { width: 4px; }
+    .modal::-webkit-scrollbar-track { background: transparent; }
+    .modal::-webkit-scrollbar-thumb { background: var(--cream-dark); border-radius: 4px; }
+
+    .modal-header {
+      background: var(--navy);
+      padding: 32px 28px 28px;
+      border-radius: 20px 20px 0 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .modal-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 100% 0%, rgba(200,150,62,.20) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,.8);
+      font-size: 18px;
+      transition: background .15s, color .15s;
+      z-index: 1;
+    }
+    .modal-close:hover { background: rgba(255,255,255,.22); color: var(--white); }
+
+    .modal-avatar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+    }
+    .modal-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--white);
+      font-family: 'Playfair Display', serif;
+      border: 3px solid rgba(255,255,255,.20);
+      flex-shrink: 0;
+    }
+    .modal-name-block {}
+    .modal-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(18px, 4vw, 22px);
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .modal-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+    .badge-sm {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      padding: 3px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+    }
+
+    .modal-body { padding: 28px; }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } }
+
+    .info-item {}
+    .info-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+    .info-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-dark);
+      line-height: 1.4;
+    }
+
+    .proker-section { margin-bottom: 22px; }
+    .proker-section:last-child { margin-bottom: 0; }
+    .proker-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .proker-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--cream-dark);
+    }
+    .pills { display: flex; flex-wrap: wrap; gap: 7px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1;
+    }
+    .pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+    .pill-pj {
+      background: rgba(220,38,38,.09);
+      color: #B91C1C;
+      border: 1px solid rgba(220,38,38,.20);
+    }
+    .pill-pj::before { background: #DC2626; }
+
+    .pill-koor {
+      background: rgba(124,58,237,.09);
+      color: #6D28D9;
+      border: 1px solid rgba(124,58,237,.20);
+    }
+    .pill-koor::before { background: #7C3AED; }
+
+    .pill-anggota {
+      background: rgba(3,105,161,.09);
+      color: #0C4A6E;
+      border: 1px solid rgba(3,105,161,.20);
+    }
+    .pill-anggota::before { background: #0369A1; }
+
+    .pill-none {
+      background: var(--cream);
+      color: var(--text-muted);
+      border: 1px solid var(--cream-dark);
+      font-style: italic;
+    }
+    .pill-none::before { display: none; }
+
+    .divider { height: 1px; background: var(--cream-dark); margin: 24px 0; }
+
+    /* ── DIVISI COLORS ── */
+    .div-rnd    { background: var(--divisi-rnd); }
+    .div-comdev { background: var(--divisi-comdev); }
+    .div-hrd    { background: var(--divisi-hrd); }
+    .div-pr     { background: var(--divisi-pr); }
+
+    .div-rnd-text    { color: var(--divisi-rnd); }
+    .div-comdev-text { color: var(--divisi-comdev); }
+    .div-hrd-text    { color: var(--divisi-hrd); }
+    .div-pr-text     { color: var(--divisi-pr); }
+
+    .jab-koor   { background: rgba(239,68,68,.12); color: #B91C1C; }
+    .jab-staf   { background: rgba(99,102,241,.12); color: #4338CA; }
+    .jab-anggota{ background: rgba(100,116,139,.12); color: #475569; }
+
+    /* ── NO RESULTS ── */
+    .no-results {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+    .no-results strong { display: block; font-size: 17px; color: var(--text-dark); margin-bottom: 6px; }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--navy);
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: rgba(255,255,255,.35);
+      letter-spacing: .03em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero { padding: 48px 16px 64px; }
+      .member-card { padding: 14px 16px; }
+      .modal-body { padding: 20px; }
+      .modal-header { padding: 24px 20px 22px; }
+      .stats-bar { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-badge">Sistem Informasi Internal</div>
+  <h1>HRIS <span>Kepengurusan</span><br>Sinergi Riset Pengabdian dan Dakwah Mahasiswa</h1>
+  <p class="hero-sub">Human Resource Information System · Cari anggota pengurus berdasarkan nama</p>
+
+  <div class="search-wrapper">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input id="searchInput" type="text" placeholder="Ketik nama anggota pengurus…" autocomplete="off" spellcheck="false" />
+    <button class="clear-btn" id="clearBtn" title="Hapus pencarian">✕</button>
+  </div>
+</header>
+
+<!-- ── STATS BAR ── -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-dot div-rnd"></span>
+    <span>Research & Development <strong id="cnt-rnd">—</strong></span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-dot div-comdev"></span>
+    <span>Community Development <strong id="cnt-comdev">—</strong></span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-dot div-hrd"></span>
+    <span>Human Resource Development <strong id="cnt-hrd">—</strong></span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-dot div-pr"></span>
+    <span>Public Relations <strong id="cnt-pr">—</strong></span>
+  </div>
+</div>
+
+<!-- ── MAIN ── -->
+<main class="main">
+  <!-- Default / Empty State -->
+  <div id="emptyState">
+    <div class="empty-icon">🔍</div>
+    <h3>Temukan Pengurus SINERA</h3>
+    <p>Mulai ketik nama di kolom pencarian di atas untuk<br>melihat informasi anggota pengurus.</p>
+  </div>
+
+  <!-- Results Area -->
+  <div id="resultsArea" style="display:none;">
+    <div class="results-header">
+      <div class="results-count">
+        Menampilkan <strong id="resultCount">0</strong> hasil untuk
+        <span class="results-keyword" id="resultKeyword"></span>
+      </div>
+    </div>
+    <div id="resultsList"></div>
+  </div>
+</main>
+
+<!-- ── MODAL ── -->
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true">
+  <div class="modal" id="modal">
+    <div class="modal-header" id="modalHeader">
+      <button class="modal-close" id="modalClose" aria-label="Tutup">✕</button>
+      <div class="modal-avatar-wrap">
+        <div class="modal-avatar" id="modalAvatar"></div>
+        <div class="modal-name-block">
+          <div class="modal-name" id="modalName"></div>
+          <div class="modal-badges" id="modalBadges"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-body">
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-label">NIM</div>
+          <div class="info-value" id="mNim"></div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Angkatan</div>
+          <div class="info-value" id="mAngkatan"></div>
+        </div>
+        <div class="info-item" style="grid-column: 1/-1;">
+          <div class="info-label">Program Studi</div>
+          <div class="info-value" id="mProdi"></div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- PJ Proker -->
+      <div class="proker-section">
+        <div class="proker-label" style="color: #B91C1C;">⚑ Penanggung Jawab (PJ) Proker</div>
+        <div class="pills" id="mPjProker"></div>
+      </div>
+
+      <!-- Koor Divisi Proker -->
+      <div class="proker-section" style="margin-top:18px;">
+        <div class="proker-label" style="color: #6D28D9;">◈ Koordinator Divisi Proker</div>
+        <div class="pills" id="mKoorProker"></div>
+      </div>
+
+      <!-- Anggota Proker -->
+      <div class="proker-section" style="margin-top:18px;">
+        <div class="proker-label" style="color: #0C4A6E;">◉ Anggota Proker</div>
+        <div class="pills" id="mAnggotaProker"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  HRIS SINERA &nbsp;·&nbsp; Data diperbarui dari dokumen resmi kepengurusan &nbsp;·&nbsp; Confidential
+</footer>
+
+<script src="data.js"></script>
+<script>
+// ── CONFIG ──────────────────────────────────────────────────────────────────
+const DATA_URL = 'data.js';
+
+// ── DIVISI UTILS ─────────────────────────────────────────────────────────────
+function divisiClass(d) {
+  if (d.includes('Research'))   return 'rnd';
+  if (d.includes('Community'))  return 'comdev';
+  if (d.includes('Human'))      return 'hrd';
+  if (d.includes('Public'))     return 'pr';
+  return 'rnd';
+}
+function divisiShort(d) {
+  if (d.includes('Research'))   return 'R&D';
+  if (d.includes('Community'))  return 'ComDev';
+  if (d.includes('Human'))      return 'HRD';
+  if (d.includes('Public'))     return 'PR';
+  return d;
+}
+function jabatanClass(j) {
+  if (j === 'Koordinator')    return 'jab-koor';
+  if (j === 'Staf Ahli')      return 'jab-staf';
+  return 'jab-anggota';
+}
+function initials(name) {
+  const parts = name.trim().split(' ');
+  if (parts.length === 1) return parts[0][0].toUpperCase();
+  return (parts[0][0] + parts[1][0]).toUpperCase();
+}
+function highlight(text, query) {
+  if (!query) return text;
+  const re = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+  return text.replace(re, '<mark style="background:rgba(200,150,62,.28);color:inherit;border-radius:3px;">$1</mark>');
+}
+
+let allMembers = membersData; // Mengambil data langsung dari variabel di data.js
+
+function loadData() {
+  if (allMembers && allMembers.length > 0) {
+    updateStats();
+  } else {
+    document.getElementById('emptyState').innerHTML = `
+      <div class="empty-icon">⚠️</div>
+      <h3>Data Kosong</h3>
+      <p>Tidak ada data pengurus yang dimuat.</p>`;
+  }
+}
+
+function updateStats() {
+  const counts = { rnd: 0, comdev: 0, hrd: 0, pr: 0 };
+  allMembers.forEach(m => { counts[divisiClass(m.divisi)]++; });
+  document.getElementById('cnt-rnd').textContent    = counts.rnd;
+  document.getElementById('cnt-comdev').textContent = counts.comdev;
+  document.getElementById('cnt-hrd').textContent    = counts.hrd;
+  document.getElementById('cnt-pr').textContent     = counts.pr;
+}
+
+// ── SEARCH ───────────────────────────────────────────────────────────────────
+const searchInput  = document.getElementById('searchInput');
+const clearBtn     = document.getElementById('clearBtn');
+const emptyState   = document.getElementById('emptyState');
+const resultsArea  = document.getElementById('resultsArea');
+const resultsList  = document.getElementById('resultsList');
+const resultCount  = document.getElementById('resultCount');
+const resultKeyword= document.getElementById('resultKeyword');
+
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim();
+  clearBtn.classList.toggle('visible', q.length > 0);
+  if (!q) { showEmpty(); return; }
+  performSearch(q);
+});
+
+clearBtn.addEventListener('click', () => {
+  searchInput.value = '';
+  clearBtn.classList.remove('visible');
+  searchInput.focus();
+  showEmpty();
+});
+
+function showEmpty() {
+  emptyState.style.display = '';
+  resultsArea.style.display = 'none';
+}
+
+function performSearch(q) {
+  const lower = q.toLowerCase();
+  const results = allMembers.filter(m => m.nama.toLowerCase().includes(lower));
+
+  emptyState.style.display = 'none';
+  resultsArea.style.display = '';
+  resultCount.textContent = results.length;
+  resultKeyword.textContent = `"${q}"`;
+
+  if (results.length === 0) {
+    resultsList.innerHTML = `<div class="no-results"><strong>Anggota tidak ditemukan</strong>Coba periksa ejaan nama yang Anda cari.</div>`;
+    return;
+  }
+
+  resultsList.innerHTML = '';
+  results.forEach((m, i) => {
+    const dc = divisiClass(m.divisi);
+    const card = document.createElement('div');
+    card.className = 'member-card';
+    card.style.animationDelay = `${i * 30}ms`;
+    card.innerHTML = `
+      <div class="member-avatar div-${dc}">${initials(m.nama)}</div>
+      <div class="member-info">
+        <div class="member-name">${highlight(m.nama, q)}</div>
+        <div class="member-meta">
+          <span>${m.angkatan}</span>
+          <span class="meta-sep">·</span>
+          <span>${m.prodi}</span>
+        </div>
+      </div>
+      <div class="member-right">
+        <span class="badge-divisi div-${dc}">${divisiShort(m.divisi)}</span>
+        <span class="badge-jabatan">${m.jabatan}</span>
+      </div>
+      <span class="card-arrow">›</span>`;
+    card.addEventListener('click', () => openModal(m));
+    resultsList.appendChild(card);
+  });
+}
+
+// ── MODAL ────────────────────────────────────────────────────────────────────
+const overlay   = document.getElementById('modalOverlay');
+const modalClose= document.getElementById('modalClose');
+
+function openModal(m) {
+  const dc = divisiClass(m.divisi);
+  document.getElementById('modalAvatar').textContent = initials(m.nama);
+  document.getElementById('modalAvatar').className = `modal-avatar div-${dc}`;
+  document.getElementById('modalName').textContent = m.nama;
+  document.getElementById('mNim').textContent = m.nim || '—';
+  document.getElementById('mAngkatan').textContent = m.angkatan || '—';
+  document.getElementById('mProdi').textContent = m.prodi || '—';
+
+  document.getElementById('modalBadges').innerHTML = `
+    <span class="badge-sm div-${dc}" style="color:#fff;">${m.divisi}</span>
+    <span class="badge-sm ${jabatanClass(m.jabatan)}">${m.jabatan}</span>`;
+
+  buildPills('mPjProker',      m.pj_proker,      'pill-pj');
+  buildPills('mKoorProker',    m.koor_proker,     'pill-koor');
+  buildPills('mAnggotaProker', m.anggota_proker,  'pill-anggota');
+
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function buildPills(elId, items, cls) {
+  const el = document.getElementById(elId);
+  if (!items || items.length === 0) {
+    el.innerHTML = `<span class="pill pill-none">Tidak ada</span>`;
+  } else {
+    el.innerHTML = items.map(p => `<span class="pill ${cls}">${p}</span>`).join('');
+  }
+}
+
+function closeModal() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+modalClose.addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+loadData();
+</script>
+</body>
+</html>
