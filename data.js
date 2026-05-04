@@ -5,7 +5,7 @@ const membersData = [
     "angkatan": "2023",
     "prodi": "Hubungan Internasional",
     "divisi": "Research and Development",
-    "jabatan": "Koordinator",
+    "jabatan": "Anggota",
     "pj_proker": [
       "PRP"
     ],
