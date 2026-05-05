@@ -914,6 +914,39 @@
     }
     .no-results strong { display: block; font-size: 17px; color: var(--text-dark); margin-bottom: 6px; }
 
+    /* ── TOMBOL PEMETAAN SUMBER DAYA ── */
+    .pemetaan-btn-row {
+      max-width: 760px;        /* sama persis dengan .search-row */
+      margin: 10px auto 0;
+    }
+    .btn-pemetaan {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;             /* full-width dalam container */
+      padding: 11px 22px;
+      background: rgba(200,150,62,.15);
+      border: 1.5px solid rgba(200,150,62,.50);
+      border-radius: 14px;     /* persegi-bulat agar nyambung dgn search bar */
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold-light);
+      cursor: pointer;
+      letter-spacing: .04em;
+      transition: background .2s, border-color .2s, color .2s, box-shadow .2s;
+    }
+    .btn-pemetaan:hover {
+      background: rgba(200,150,62,.28);
+      border-color: var(--gold);
+      color: var(--white);
+      box-shadow: 0 4px 20px rgba(200,150,62,.20);
+    }
+    @media (max-width: 600px) {
+      .pemetaan-btn-row { margin-top: 8px; }
+    }
+
     /* ── FOOTER ── */
     .footer {
       background: var(--navy);
@@ -969,6 +1002,13 @@
         <option value="Pengurus Inti">Pengurus Inti</option>
       </select>
     </div>
+  </div>
+
+  <!-- ── TOMBOL PEMETAAN SUMBER DAYA ── -->
+  <div class="pemetaan-btn-row">
+    <button id="btnPemetaan" class="btn-pemetaan" onclick="openPemetaan()">
+      🗂️ Pemetaan Sumber Daya
+    </button>
   </div>
 </header>
 
@@ -1072,6 +1112,64 @@
         <div class="proker-label" style="color: #0C4A6E;">◉ Anggota Proker</div>
         <div class="pills" id="mAnggotaProker"></div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MODAL PEMETAAN SUMBER DAYA ── -->
+<div id="pemetaanOverlay" style="
+  position: fixed; inset: 0;
+  background: rgba(10,22,40,.75);
+  backdrop-filter: blur(6px);
+  z-index: 1200;
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: 24px 16px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s;
+  overflow-y: auto;
+" role="dialog" aria-modal="true" aria-label="Pemetaan Sumber Daya">
+  <div id="pemetaanModal" style="
+    background: var(--white);
+    border-radius: 20px;
+    width: 100%; max-width: 1000px;
+    box-shadow: var(--shadow-lg);
+    transform: scale(.94) translateY(16px);
+    transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+    overflow: hidden;
+  ">
+    <!-- Header -->
+    <div style="
+      background: var(--navy); padding: 26px 28px 22px;
+      border-radius: 20px 20px 0 0; position: relative; overflow: hidden;
+    ">
+      <div style="
+        position: absolute; inset: 0;
+        background: radial-gradient(ellipse 80% 60% at 100% 0%, rgba(200,150,62,.22) 0%, transparent 60%);
+        pointer-events: none;
+      "></div>
+      <button onclick="closePemetaan()" style="
+        position: absolute; top: 14px; right: 14px;
+        background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.15);
+        border-radius: 50%; width: 34px; height: 34px; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        color: rgba(255,255,255,.8); font-size: 17px; z-index: 1;
+        transition: background .15s;
+      " onmouseover="this.style.background='rgba(255,255,255,.22)'" onmouseout="this.style.background='rgba(255,255,255,.12)'">✕</button>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);margin-bottom:6px;position:relative;">Pemetaan Sumber Daya</div>
+      <div style="font-family:'Playfair Display',serif;font-size:clamp(17px,4vw,22px);font-weight:700;color:var(--white);line-height:1.2;position:relative;">Resource Mapping · Seluruh Divisi</div>
+    </div>
+
+    <!-- Tab Divisi -->
+    <div id="pemetaanTabBar" style="
+      display: flex; gap: 0;
+      background: var(--navy-mid);
+      border-bottom: 2px solid rgba(255,255,255,.08);
+      overflow-x: auto;
+    "></div>
+
+    <!-- Konten Tabel -->
+    <div style="padding: 24px; overflow-x: auto;">
+      <div id="pemetaanTableWrap"></div>
     </div>
   </div>
 </div>
@@ -1466,7 +1564,8 @@ function showProkerList(divisiName) {
 function showProkerDetail(prokerName) {
   pmEyebrow.textContent = _pmCurrentDivisi ? divisiShort(_pmCurrentDivisi) + ' › Proker' : 'Proker';
   pmTitle.textContent   = prokerName;
-  pmBack.classList.add('visible');
+  // Sembunyikan pmBack di header — kita pakai tombol dalam pm-toolbar
+  pmBack.classList.remove('visible');
 
   let hasAnyone = false;
   let html = '';
@@ -1503,7 +1602,15 @@ function showProkerDetail(prokerName) {
     html = `<div class="pm-empty">Belum ada anggota yang terdaftar di proker <strong>${prokerName}</strong>.</div>`;
   }
 
-  pmBody.innerHTML = html;
+  // Toolbar "Kembali ke Grid" — desain identik dengan tombol di Mode Tabel
+  const divisiEsc = (_pmCurrentDivisi || '').replace(/'/g, "\\'");
+  pmBody.innerHTML = `
+    <div class="pm-toolbar">
+      <button class="btn-mode" onclick="showProkerList('${divisiEsc}')">
+        ‹ Kembali ke Grid
+      </button>
+    </div>
+    ${html}`;
 }
 
 /**
@@ -1521,32 +1628,65 @@ function openMemberByName(nama) {
 
 /**
  * showProkerTable(divisiName)
- * Render tampilan tabel dengan kolom: Nama Proker | PJ | Koor | SA | Anggota.
- * Semua nama di dalam sel bisa diklik untuk membuka profil.
+ * Render tabel BEBAN KERJA ANGGOTA:
+ *   Baris  = setiap anggota di divisi (Koordinator → Staf Ahli → Anggota)
+ *   Kolom  = Nama Anggota | PJ Proker | Koor Divisi Proker | Staf Ahli Divisi Proker | Anggota Proker
  */
 function showProkerTable(divisiName) {
-  const prokers = PROKER_MAP[divisiName] || [];
+  // Urutkan: Koordinator → Staf Ahli → Anggota
+  const ORDER = ['Koordinator', 'Staf Ahli', 'Anggota'];
+  const members = allMembers
+    .filter(m => m.divisi === divisiName)
+    .sort((a, b) => ORDER.indexOf(a.jabatan) - ORDER.indexOf(b.jabatan));
 
   pmEyebrow.textContent = 'Mode Tabel';
-  pmTitle.textContent   = divisiShort(divisiName) + ' · Semua Proker';
-  pmBack.classList.add('visible');
+  pmTitle.textContent   = divisiShort(divisiName) + ' · Beban Kerja Anggota';
+  pmBack.classList.remove('visible');
 
-  // Helper: ambil nama-nama dari allMembers untuk proker+key tertentu
-  function getNamas(prokerName, key) {
-    return allMembers
-      .filter(m => Array.isArray(m[key]) && m[key].some(p => p.toLowerCase() === prokerName.toLowerCase()))
-      .map(m => `<span class="member-link" data-nama="${m.nama.replace(/"/g,'&quot;')}" onclick="openMemberByName(this.dataset.nama)">${m.nama}</span>`)
-      .join('<br>') || `<span class="tbl-empty">—</span>`;
+  // Helper: render daftar nama proker sebagai pill-tag berwarna
+  function prokerTags(arr, color) {
+    if (!arr || arr.length === 0) return `<span class="tbl-empty">—</span>`;
+    return arr.map(p =>
+      `<span style="display:inline-block;background:${color}1a;color:${color};
+        border:1px solid ${color}33;border-radius:6px;padding:2px 8px;
+        font-size:11px;font-weight:600;margin:2px 2px 2px 0;line-height:1.6;">${p}</span>`
+    ).join('');
   }
 
-  const rows = prokers.map(p => `
-    <tr>
-      <td>${PROKER_ICON[p] || '📌'} ${p}</td>
-      <td>${getNamas(p, 'pj_proker')}</td>
-      <td>${getNamas(p, 'koor_proker')}</td>
-      <td>${getNamas(p, 'stafahli_proker')}</td>
-      <td>${getNamas(p, 'anggota_proker')}</td>
-    </tr>`).join('');
+  const rows = members.map(m => {
+    const dc       = divisiClass(m.divisi);
+    const jabClass = jabatanClass(m.jabatan);
+    const totalBeban = (m.pj_proker?.length || 0) + (m.koor_proker?.length || 0)
+                     + (m.stafahli_proker?.length || 0) + (m.anggota_proker?.length || 0);
+    return `
+      <tr style="border-bottom:1px solid var(--cream-dark);">
+        <td style="padding:11px 14px;white-space:nowrap;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;
+              justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;
+              font-family:'Playfair Display',serif;" class="div-${dc}">${initials(m.nama)}</div>
+            <div>
+              <div style="font-weight:600;font-size:13px;color:var(--navy);cursor:pointer;
+                border-bottom:1px dashed var(--text-light);"
+                data-nama="${m.nama.replace(/"/g,'&quot;')}"
+                onclick="openMemberByName(this.dataset.nama)"
+                onmouseover="this.style.color='var(--gold)';this.style.borderColor='var(--gold)';"
+                onmouseout="this.style.color='var(--navy)';this.style.borderColor='var(--text-light)';">
+                ${m.nama}
+              </div>
+              <div style="display:flex;align-items:center;gap:5px;margin-top:3px;">
+                <span class="badge-sm ${jabClass}" style="font-size:10px;padding:1px 7px;">${m.jabatan}</span>
+                ${totalBeban > 0 ? `<span style="font-size:10px;color:var(--text-muted);">${totalBeban} tugas</span>` : ''}
+              </div>
+            </div>
+          </div>
+        </td>
+        <td style="padding:11px 14px;vertical-align:top;">${prokerTags(m.pj_proker,       '#DC2626')}</td>
+        <td style="padding:11px 14px;vertical-align:top;">${prokerTags(m.koor_proker,     '#7C3AED')}</td>
+        <td style="padding:11px 14px;vertical-align:top;">${prokerTags(m.stafahli_proker, '#7C3AED')}</td>
+        <td style="padding:11px 14px;vertical-align:top;">${prokerTags(m.anggota_proker,  '#0369A1')}</td>
+      </tr>`;
+  }).join('');
 
   pmBody.innerHTML = `
     <div class="pm-toolbar">
@@ -1555,17 +1695,17 @@ function showProkerTable(divisiName) {
       </button>
     </div>
     <div class="proker-table-wrap">
-      <table class="proker-table">
+      <table class="proker-table" style="min-width:620px;">
         <thead>
           <tr>
-            <th>Nama Proker</th>
-            <th>⚑ PJ</th>
-            <th>◈ Koor Divisi</th>
-            <th>◈ Staf Ahli</th>
-            <th>◉ Anggota</th>
+            <th style="min-width:180px;">Nama Anggota Divisi</th>
+            <th>⚑ PJ Proker</th>
+            <th>◈ Koor Divisi Proker</th>
+            <th>◈ Staf Ahli Divisi</th>
+            <th>◉ Anggota Proker</th>
           </tr>
         </thead>
-        <tbody>${rows}</tbody>
+        <tbody>${rows || '<tr><td colspan="5" style="text-align:center;padding:28px;color:var(--text-muted);">Tidak ada anggota.</td></tr>'}</tbody>
       </table>
     </div>`;
 }
@@ -1586,6 +1726,171 @@ pmOverlay.addEventListener('click', e => { if (e.target === pmOverlay) closeProk
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && pmOverlay.classList.contains('open')) closeProkerModal();
 });
+
+// ── PEMETAAN SUMBER DAYA ─────────────────────────────────────────────────────
+
+const PEMETAAN_DIVISI = [
+  { key: 'Research and Development',   short: 'R&D',    color: 'var(--divisi-rnd)'    },
+  { key: 'Community Development',      short: 'ComDev', color: 'var(--divisi-comdev)' },
+  { key: 'Human Resource Development', short: 'HRD',    color: 'var(--divisi-hrd)'    },
+  { key: 'Public Relations',           short: 'PR',     color: 'var(--divisi-pr)'     },
+];
+
+let _pemetaanActive = 'Research and Development';
+
+const pemetaanOverlay = document.getElementById('pemetaanOverlay');
+
+function openPemetaan() {
+  _pemetaanActive = PEMETAAN_DIVISI[0].key;
+  renderPemetaanTabs();
+  renderPemetaanTable(_pemetaanActive);
+  pemetaanOverlay.style.opacity = '1';
+  pemetaanOverlay.style.pointerEvents = 'all';
+  document.getElementById('pemetaanModal').style.transform = 'scale(1) translateY(0)';
+  document.body.style.overflow = 'hidden';
+}
+
+function closePemetaan() {
+  pemetaanOverlay.style.opacity = '0';
+  pemetaanOverlay.style.pointerEvents = 'none';
+  document.getElementById('pemetaanModal').style.transform = 'scale(.94) translateY(16px)';
+  document.body.style.overflow = '';
+}
+
+pemetaanOverlay.addEventListener('click', e => {
+  if (e.target === pemetaanOverlay) closePemetaan();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && pemetaanOverlay.style.opacity === '1') closePemetaan();
+});
+
+function renderPemetaanTabs() {
+  const bar = document.getElementById('pemetaanTabBar');
+  bar.innerHTML = PEMETAAN_DIVISI.map(d => `
+    <button onclick="switchPemetaanTab('${d.key.replace(/'/g, "\\'")}')"
+      id="pmtab-${d.key.replace(/\s+/g,'_')}"
+      style="
+        flex-shrink: 0;
+        padding: 13px 20px;
+        background: transparent;
+        border: none;
+        border-bottom: 3px solid ${d.key === _pemetaanActive ? d.color : 'transparent'};
+        font-family: 'Inter', sans-serif;
+        font-size: 13px; font-weight: 600;
+        color: ${d.key === _pemetaanActive ? d.color : 'rgba(255,255,255,.5)'};
+        cursor: pointer;
+        transition: color .15s, border-color .15s;
+        white-space: nowrap;
+      "
+      onmouseover="if('${d.key}'!=='${_pemetaanActive}'){this.style.color='rgba(255,255,255,.8)';}"
+      onmouseout="if('${d.key}'!=='${_pemetaanActive}'){this.style.color='rgba(255,255,255,.5)';}">
+      ${d.short}
+    </button>
+  `).join('');
+}
+
+function switchPemetaanTab(divisiKey) {
+  _pemetaanActive = divisiKey;
+  renderPemetaanTabs();
+  renderPemetaanTable(divisiKey);
+}
+
+function renderPemetaanTable(divisiKey) {
+  const members = allMembers.filter(m => m.divisi === divisiKey);
+  const prokers = PROKER_MAP[divisiKey] || [];
+
+  // Find coordinator (jabatan=Koordinator), staf ahli (jabatan=Staf Ahli) of the division
+  const koorDiv   = members.filter(m => m.jabatan === 'Koordinator');
+  const stafDiv   = members.filter(m => m.jabatan === 'Staf Ahli');
+  const anggDiv   = members.filter(m => m.jabatan === 'Anggota');
+
+  const divConf = PEMETAAN_DIVISI.find(d => d.key === divisiKey);
+  const accent  = divConf ? divConf.color : 'var(--gold)';
+
+  // Helper: get members by proker + role key
+  function byProkerRole(prokerName, roleKey) {
+    return members.filter(m =>
+      Array.isArray(m[roleKey]) &&
+      m[roleKey].some(p => p.toLowerCase() === prokerName.toLowerCase())
+    );
+  }
+
+  // Helper: render member link in table
+  function memberLinks(arr) {
+    if (!arr || arr.length === 0) return '<span style="color:var(--text-light);font-style:italic;font-size:11px;">—</span>';
+    return arr.map(m =>
+      `<span style="display:inline-block;cursor:pointer;color:var(--text-dark);font-weight:500;
+        border-bottom:1px dashed var(--text-light);line-height:1.8;font-size:12px;
+        transition:color .12s;margin-right:4px;"
+        onmouseover="this.style.color='var(--gold)';this.style.borderColor='var(--gold)';"
+        onmouseout="this.style.color='var(--text-dark)';this.style.borderColor='var(--text-light)';"
+        data-nama="${m.nama.replace(/"/g,'&quot;')}"
+        onclick="pemetaanOpenMember(this.dataset.nama)">${m.nama}</span>`
+    ).join('<br>');
+  }
+
+  // Build rows: one row per proker
+  const prokerRows = prokers.map(p => {
+    const pj    = byProkerRole(p, 'pj_proker');
+    const koor  = byProkerRole(p, 'koor_proker');
+    const sa    = byProkerRole(p, 'stafahli_proker');
+    const ang   = byProkerRole(p, 'anggota_proker');
+    return `
+      <tr style="border-bottom: 1px solid var(--cream-dark);">
+        <td style="padding:12px 14px;font-weight:700;color:var(--navy);white-space:nowrap;font-size:13px;">
+          ${PROKER_ICON[p] || '📌'} ${p}
+        </td>
+        <td style="padding:12px 14px;vertical-align:top;">${memberLinks(pj)}</td>
+        <td style="padding:12px 14px;vertical-align:top;">${memberLinks(koor)}</td>
+        <td style="padding:12px 14px;vertical-align:top;">${memberLinks(sa)}</td>
+        <td style="padding:12px 14px;vertical-align:top;">${memberLinks(ang)}</td>
+      </tr>`;
+  }).join('');
+
+  // Division info summary row
+  const summaryHtml = `
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;align-items:center;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="width:12px;height:12px;border-radius:50%;background:${accent};flex-shrink:0;display:inline-block;"></span>
+        <span style="font-size:13px;font-weight:600;color:var(--text-dark);">${divisiKey}</span>
+      </div>
+      <span style="font-size:12px;color:var(--text-muted);">
+        ${koorDiv.map(m => m.nama).join(', ') || '—'} (Koordinator)
+      </span>
+      ${stafDiv.length ? `<span style="font-size:12px;color:var(--text-muted);">
+        ${stafDiv.map(m => m.nama).join(', ')} (Staf Ahli)
+      </span>` : ''}
+      <span style="margin-left:auto;font-size:12px;color:var(--text-muted);background:var(--cream-dark);padding:3px 10px;border-radius:999px;">
+        ${members.length} Anggota · ${prokers.length} Proker
+      </span>
+    </div>`;
+
+  const tableHtml = prokers.length === 0
+    ? `<div style="text-align:center;padding:40px;color:var(--text-muted);">Tidak ada proker terdaftar untuk divisi ini.</div>`
+    : `<div style="overflow-x:auto;border-radius:12px;border:1px solid var(--cream-dark);">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:700px;">
+          <thead>
+            <tr>
+              <th style="background:var(--navy);color:rgba(255,255,255,.75);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:11px 14px;text-align:left;white-space:nowrap;border-radius:11px 0 0 0;">Nama Proker</th>
+              <th style="background:var(--navy);color:rgba(255,255,255,.75);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:11px 14px;text-align:left;white-space:nowrap;">⚑ PJ Proker</th>
+              <th style="background:var(--navy);color:rgba(255,255,255,.75);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:11px 14px;text-align:left;white-space:nowrap;">◈ Koor Divisi Proker</th>
+              <th style="background:var(--navy);color:rgba(255,255,255,.75);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:11px 14px;text-align:left;white-space:nowrap;">◈ Staf Ahli Divisi</th>
+              <th style="background:var(--navy);color:rgba(255,255,255,.75);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:11px 14px;text-align:left;white-space:nowrap;border-radius:0 11px 0 0;">◉ Anggota Proker</th>
+            </tr>
+          </thead>
+          <tbody>${prokerRows}</tbody>
+        </table>
+      </div>`;
+
+  document.getElementById('pemetaanTableWrap').innerHTML = summaryHtml + tableHtml;
+}
+
+function pemetaanOpenMember(nama) {
+  const m = allMembers.find(x => x.nama.toLowerCase() === nama.toLowerCase());
+  if (!m) return;
+  closePemetaan();
+  setTimeout(() => openModal(m), 220);
+}
 
 // ── INIT ─────────────────────────────────────────────────────────────────────
 loadData();
