@@ -8,6 +8,7 @@ const membersData = [
     "jabatan": "Ketua Umum",
     "pj_proker": [],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -19,6 +20,7 @@ const membersData = [
     "jabatan": "Wakil Ketua Umum",
     "pj_proker": [],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": [
       "PM"
     ]
@@ -32,6 +34,7 @@ const membersData = [
     "jabatan": "Sekretaris Umum",
     "pj_proker": [],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -43,10 +46,11 @@ const membersData = [
     "jabatan": "Wakil Sekretaris Umum",
     "pj_proker": [],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": [
       "PPKO"
     ]
-  }, 
+  },
   {
     "nama": "Alwan Chandra Ririh Adhyaksa",
     "nim": "23511094",
@@ -56,6 +60,7 @@ const membersData = [
     "jabatan": "Bendahara Umum",
     "pj_proker": [],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -67,8 +72,9 @@ const membersData = [
     "jabatan": "Wakil Bendahara Umum",
     "pj_proker": [],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": []
-  },  
+  },
   {
     "nama": "Wafiq Rahma Aulia Putri",
     "nim": "23611100",
@@ -78,6 +84,7 @@ const membersData = [
     "jabatan": "Koordinator",
     "pj_proker": [],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -89,6 +96,7 @@ const membersData = [
     "jabatan": "Staf Ahli",
     "pj_proker": [],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -102,13 +110,14 @@ const membersData = [
       "PRP"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": [
       "PPKO",
       "Kunjungan Edukasi",
       "SICARE",
       "Sinera Recruitment"
     ]
-  },    
+  },
   {
     "nama": "Yulia Kartika",
     "nim": "24231019",
@@ -120,6 +129,7 @@ const membersData = [
       "PRP"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": [
       "Kunjungan Edukasi"
     ]
@@ -135,6 +145,7 @@ const membersData = [
       "LSF"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": [
       "ASF"
     ]
@@ -150,6 +161,7 @@ const membersData = [
       "SP"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -163,6 +175,7 @@ const membersData = [
       "SP"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": [
       "PPKO",
       "Kunjungan Edukasi",
@@ -180,6 +193,7 @@ const membersData = [
       "LSF"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": [
       "PPKO",
       "Kunjungan Edukasi",
@@ -197,6 +211,7 @@ const membersData = [
       "SP"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": [
       "PPKO"
     ]
@@ -212,6 +227,7 @@ const membersData = [
       "LSF"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": [
       "SCCA"
     ]
@@ -227,6 +243,7 @@ const membersData = [
       "LSF"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": [
       "Kunjungan Edukasi"
     ]
@@ -242,6 +259,7 @@ const membersData = [
       "LSF"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": [
       "Sinera Recruitment"
     ]
@@ -257,6 +275,7 @@ const membersData = [
       "PRP"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": [
       "SICARE"
     ]
@@ -272,6 +291,7 @@ const membersData = [
       "SP"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": [
       "SAPA"
     ]
@@ -287,6 +307,7 @@ const membersData = [
       "PRP"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": [
       "PM",
       "Kunjungan Edukasi"
@@ -305,6 +326,7 @@ const membersData = [
     "koor_proker": [
       "LSF"
     ],
+    "stafahli_proker": [],
     "anggota_proker": [
       "ASF"
     ]
@@ -318,8 +340,10 @@ const membersData = [
     "jabatan": "Koordinator",
     "pj_proker": [],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": []
-  },  {
+  },
+  {
     "nama": "Roisul Umdy Annajih",
     "nim": "24410575",
     "angkatan": "2024",
@@ -330,8 +354,9 @@ const membersData = [
       "PPKO"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": []
-  },  
+  },
   {
     "nama": "Fakhma Mujahida",
     "nim": "23422029",
@@ -345,6 +370,7 @@ const membersData = [
     "koor_proker": [
       "SI CARE"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -358,6 +384,7 @@ const membersData = [
       "SI CARE"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -371,6 +398,7 @@ const membersData = [
       "SAPA"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -386,6 +414,7 @@ const membersData = [
     "koor_proker": [
       "LSF"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -399,6 +428,7 @@ const membersData = [
       "PPKO"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -413,6 +443,7 @@ const membersData = [
       "LSF"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -428,6 +459,7 @@ const membersData = [
     "koor_proker": [
       "LSF"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -441,6 +473,7 @@ const membersData = [
     "koor_proker": [
       "SI CARE"
     ],
+    "stafahli_proker": [],
     "anggota_proker": [
       "ASF"
     ]
@@ -456,6 +489,7 @@ const membersData = [
     "koor_proker": [
       "SI CARE"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -470,6 +504,7 @@ const membersData = [
       "Sapa",
       "LSF"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -483,6 +518,7 @@ const membersData = [
     "koor_proker": [
       "Sapa"
     ],
+    "stafahli_proker": [],
     "anggota_proker": [
       "ASF"
     ]
@@ -498,6 +534,7 @@ const membersData = [
       "SI CARE"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": [
       "ASF"
     ]
@@ -513,6 +550,7 @@ const membersData = [
       "SI CARE"
     ],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -527,6 +565,7 @@ const membersData = [
       "SI CARE",
       "LSF"
     ],
+    "stafahli_proker": [],
     "anggota_proker": [
       "ASF"
     ]
@@ -542,6 +581,7 @@ const membersData = [
     "koor_proker": [
       "Sapa"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -555,6 +595,7 @@ const membersData = [
     "koor_proker": [
       "SI CARE"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -566,8 +607,9 @@ const membersData = [
     "jabatan": "Koordinator",
     "pj_proker": [],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": []
-  },  
+  },
   {
     "nama": "Razifa Haryatno",
     "nim": "24613160",
@@ -577,6 +619,7 @@ const membersData = [
     "jabatan": "Staf Ahli",
     "pj_proker": [],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -592,6 +635,7 @@ const membersData = [
     "koor_proker": [
       "ASF"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -607,6 +651,7 @@ const membersData = [
     "koor_proker": [
       "ASF"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -622,6 +667,7 @@ const membersData = [
     "koor_proker": [
       "SERASI"
     ],
+    "stafahli_proker": [],
     "anggota_proker": [
       "ASF"
     ]
@@ -640,6 +686,7 @@ const membersData = [
       "SR",
       "ASF"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -656,6 +703,7 @@ const membersData = [
       "SWF",
       "ASF"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -672,6 +720,7 @@ const membersData = [
       "SWF",
       "SR"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -687,6 +736,7 @@ const membersData = [
     "koor_proker": [
       "SWF"
     ],
+    "stafahli_proker": [],
     "anggota_proker": [
       "ASF"
     ]
@@ -705,6 +755,7 @@ const membersData = [
       "SR",
       "SERASI"
     ],
+    "stafahli_proker": [],
     "anggota_proker": [
       "ASF"
     ]
@@ -722,6 +773,7 @@ const membersData = [
     "koor_proker": [
       "SR"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -737,6 +789,7 @@ const membersData = [
     "koor_proker": [
       "SERASI"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -752,6 +805,7 @@ const membersData = [
     "koor_proker": [
       "SWF"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -768,6 +822,7 @@ const membersData = [
       "SWF",
       "SR"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -783,6 +838,7 @@ const membersData = [
     "koor_proker": [
       "SERASI"
     ],
+    "stafahli_proker": [],
     "anggota_proker": [
       "ASF"
     ]
@@ -801,6 +857,7 @@ const membersData = [
     "koor_proker": [
       "SWF"
     ],
+    "stafahli_proker": [],
     "anggota_proker": [
       "ASF"
     ]
@@ -814,8 +871,9 @@ const membersData = [
     "jabatan": "Koordinator",
     "pj_proker": [],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": []
-  },  
+  },
   {
     "nama": "Aulira Rahmi Anum",
     "nim": "23523140",
@@ -825,6 +883,7 @@ const membersData = [
     "jabatan": "Staf Ahli",
     "pj_proker": [],
     "koor_proker": [],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -840,6 +899,7 @@ const membersData = [
     "koor_proker": [
       "Kunjungan Edukasi"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -856,6 +916,7 @@ const membersData = [
       "Kunjungan Edukasi",
       "LSF"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -871,6 +932,7 @@ const membersData = [
     "koor_proker": [
       "Kunjungan Edukasi"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -886,6 +948,7 @@ const membersData = [
     "koor_proker": [
       "SCCA"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -901,6 +964,7 @@ const membersData = [
     "koor_proker": [
       "SOH"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -917,6 +981,7 @@ const membersData = [
     "koor_proker": [
       "SCCA"
     ],
+    "stafahli_proker": [],
     "anggota_proker": [
       "ASF"
     ]
@@ -935,6 +1000,7 @@ const membersData = [
       "SOH",
       "LSF"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -950,6 +1016,7 @@ const membersData = [
     "koor_proker": [
       "Kunjungan Edukasi"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -965,6 +1032,7 @@ const membersData = [
     "koor_proker": [
       "SOH"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -981,6 +1049,7 @@ const membersData = [
     "koor_proker": [
       "SCCA"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -996,6 +1065,7 @@ const membersData = [
     "koor_proker": [
       "SOH"
     ],
+    "stafahli_proker": [],
     "anggota_proker": [
       "ASF"
     ]
@@ -1013,6 +1083,7 @@ const membersData = [
     "koor_proker": [
       "SCCA"
     ],
+    "stafahli_proker": [],
     "anggota_proker": [
       "ASF"
     ]
@@ -1031,6 +1102,7 @@ const membersData = [
       "Kunjungan Edukasi",
       "LSF"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -1046,6 +1118,7 @@ const membersData = [
     "koor_proker": [
       "LSF"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -1061,6 +1134,7 @@ const membersData = [
     "koor_proker": [
       "SCCA"
     ],
+    "stafahli_proker": [],
     "anggota_proker": []
   },
   {
@@ -1077,8 +1151,9 @@ const membersData = [
     "koor_proker": [
       "SOH"
     ],
+    "stafahli_proker": [],
     "anggota_proker": [
       "ASF"
     ]
   }
-]
+];
