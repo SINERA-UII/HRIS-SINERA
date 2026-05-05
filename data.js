@@ -19,7 +19,9 @@ const membersData = [
     "jabatan": "Wakil Ketua Umum",
     "pj_proker": [],
     "koor_proker": [],
-    "anggota_proker": []
+    "anggota_proker": [
+      "PM"
+    ]
   },
   {
     "nama": "Elena Shafa' Salsabila",
@@ -41,7 +43,9 @@ const membersData = [
     "jabatan": "Wakil Sekretaris Umum",
     "pj_proker": [],
     "koor_proker": [],
-    "anggota_proker": []
+    "anggota_proker": [
+      "PPKO"
+    ]
   }, 
   {
     "nama": "Alwan Chandra Ririh Adhyaksa",
@@ -101,7 +105,7 @@ const membersData = [
     "anggota_proker": [
       "PPKO",
       "Kunjungan Edukasi",
-      "SiCARE",
+      "SICARE",
       "Sinera Recruitment"
     ]
   },    
@@ -162,7 +166,7 @@ const membersData = [
     "anggota_proker": [
       "PPKO",
       "Kunjungan Edukasi",
-      "SiCARE"
+      "SICARE"
     ]
   },
   {
@@ -179,7 +183,7 @@ const membersData = [
     "anggota_proker": [
       "PPKO",
       "Kunjungan Edukasi",
-      "SiCARE"
+      "SICARE"
     ]
   },
   {
@@ -231,7 +235,7 @@ const membersData = [
     "nama": "Alya Nur Fauziah",
     "nim": "25421006",
     "angkatan": "2025",
-    "prodi": "Ahwal Al-Syakhshiyah",
+    "prodi": "Ahwal Syakhshiyah",
     "divisi": "Research and Development",
     "jabatan": "Anggota",
     "pj_proker": [
@@ -254,7 +258,7 @@ const membersData = [
     ],
     "koor_proker": [],
     "anggota_proker": [
-      "SiCARE"
+      "SICARE"
     ]
   },
   {
@@ -322,7 +326,9 @@ const membersData = [
     "prodi": "Hukum",
     "divisi": "Community Development",
     "jabatan": "Staf Ahli",
-    "pj_proker": [],
+    "pj_proker": [
+      "PPKO"
+    ],
     "koor_proker": [],
     "anggota_proker": []
   },  
@@ -462,7 +468,7 @@ const membersData = [
     "pj_proker": [],
     "koor_proker": [
       "Sapa",
-      "lsf"
+      "LSF"
     ],
     "anggota_proker": []
   },
@@ -693,7 +699,7 @@ const membersData = [
     "divisi": "Human Resource Development",
     "jabatan": "Anggota",
     "pj_proker": [
-      "Reading Corner"
+      "RC"
     ],
     "koor_proker": [
       "SR",
@@ -726,7 +732,7 @@ const membersData = [
     "divisi": "Human Resource Development",
     "jabatan": "Anggota",
     "pj_proker": [
-      "Reading Corner"
+      "RC"
     ],
     "koor_proker": [
       "SERASI"
@@ -737,7 +743,7 @@ const membersData = [
     "nama": "Ridwan Maulana Apandi",
     "nim": "24421053",
     "angkatan": "2024",
-    "prodi": "Ahwal Al-Syakhshiyah",
+    "prodi": "Ahwal Syakhshiyah",
     "divisi": "Human Resource Development",
     "jabatan": "Anggota",
     "pj_proker": [
@@ -789,7 +795,7 @@ const membersData = [
     "divisi": "Human Resource Development",
     "jabatan": "Anggota",
     "pj_proker": [
-      "Reading Corner",
+      "RC",
       "SR"
     ],
     "koor_proker": [
