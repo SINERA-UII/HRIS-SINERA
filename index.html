@@ -37,6 +37,7 @@
 
       --pill-pj:       #DC2626;
       --pill-koor:     #7C3AED;
+      --pill-sa:       #7C3AED;
       --pill-anggota:  #0369A1;
 
       --shadow-sm: 0 2px 8px rgba(10,22,40,.10);
@@ -280,7 +281,18 @@
       color: rgba(255,255,255,.60);
       font-size: 13px;
       font-weight: 500;
+      cursor: pointer;                         /* ← klik untuk lihat proker */
+      padding: 5px 10px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      transition: background .15s, color .15s, border-color .15s;
     }
+    .stat-item:hover {
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.90);
+      border-color: rgba(255,255,255,.12);
+    }
+    .stat-item:hover strong { color: var(--gold-light); }
     .stat-dot {
       width: 8px;
       height: 8px;
@@ -288,6 +300,162 @@
       flex-shrink: 0;
     }
     .stat-item strong { color: var(--white); }
+
+    /* ── PROKER MODAL ── */
+    #prokerModalOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10,22,40,.70);
+      backdrop-filter: blur(6px);
+      z-index: 1100;                           /* di atas modal anggota (z:1000) */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s;
+    }
+    #prokerModalOverlay.open { opacity: 1; pointer-events: all; }
+
+    #prokerModal {
+      background: var(--white);
+      border-radius: 20px;
+      max-width: 520px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+      transform: scale(.94) translateY(16px);
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+    }
+    #prokerModalOverlay.open #prokerModal { transform: scale(1) translateY(0); }
+    #prokerModal::-webkit-scrollbar { width: 4px; }
+    #prokerModal::-webkit-scrollbar-thumb { background: var(--cream-dark); border-radius: 4px; }
+
+    .pm-header {
+      background: var(--navy);
+      padding: 26px 28px 22px;
+      border-radius: 20px 20px 0 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .pm-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 100% 0%, rgba(200,150,62,.22) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .pm-close {
+      position: absolute;
+      top: 14px; right: 14px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 50%;
+      width: 34px; height: 34px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.8);
+      font-size: 17px;
+      transition: background .15s;
+      z-index: 1;
+    }
+    .pm-close:hover { background: rgba(255,255,255,.22); color: var(--white); }
+    .pm-back {
+      position: absolute;
+      top: 14px; left: 14px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 8px;
+      padding: 5px 12px;
+      cursor: pointer;
+      display: none; align-items: center; gap: 5px;
+      color: rgba(255,255,255,.75);
+      font-size: 12px; font-weight: 600;
+      transition: background .15s;
+      z-index: 1;
+    }
+    .pm-back:hover { background: rgba(255,255,255,.22); color: var(--white); }
+    .pm-back.visible { display: flex; }
+
+    .pm-eyebrow {
+      font-size: 10px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--gold-light);
+      margin-bottom: 6px; position: relative;
+    }
+    .pm-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(17px, 4vw, 22px);
+      font-weight: 700; color: var(--white);
+      line-height: 1.2; position: relative;
+    }
+    .pm-body { padding: 24px; }
+
+    /* Grid tombol proker */
+    .proker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px;
+    }
+    .proker-btn {
+      background: var(--cream);
+      border: 1.5px solid var(--cream-dark);
+      border-radius: 12px;
+      padding: 14px 12px;
+      cursor: pointer;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 600;
+      color: var(--text-dark);
+      transition: background .15s, border-color .15s, transform .12s, box-shadow .15s;
+      line-height: 1.3;
+    }
+    .proker-btn:hover {
+      border-color: var(--gold);
+      background: rgba(200,150,62,.08);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+    .proker-btn-icon { font-size: 20px; display: block; margin-bottom: 6px; }
+
+    /* Detail proker — peran groups */
+    .peran-group { margin-bottom: 20px; }
+    .peran-group:last-child { margin-bottom: 0; }
+    .peran-label {
+      font-size: 10px; font-weight: 800; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--text-muted);
+      display: flex; align-items: center; gap: 7px;
+      margin-bottom: 10px;
+    }
+    .peran-label::after { content: ''; flex: 1; height: 1px; background: var(--cream-dark); }
+    .peran-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+    /* Mini member row (inside proker detail) */
+    .mini-member {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: var(--cream);
+      margin-bottom: 7px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: border-color .12s, box-shadow .12s;
+    }
+    .mini-member:last-child { margin-bottom: 0; }
+    .mini-member:hover { border-color: var(--gold); box-shadow: var(--shadow-sm); }
+    .mini-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: var(--white);
+      font-family: 'Playfair Display', serif; flex-shrink: 0;
+    }
+    .mini-name { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+    .mini-sub  { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+    .mini-arrow { margin-left: auto; color: var(--text-light); font-size: 16px; flex-shrink: 0; }
+    .mini-member:hover .mini-arrow { color: var(--gold); }
+
+    .pm-empty { text-align:center; padding:28px 0; color:var(--text-muted); font-size:13px; }
 
     /* ── MAIN CONTENT ── */
     .main {
@@ -618,6 +786,13 @@
     }
     .pill-koor::before { background: #7C3AED; }
 
+    .pill-sa {
+      background: rgba(124,58,237,.09);
+      color: #6D28D9;
+      border: 1px solid rgba(124,58,237,.20);
+    }
+    .pill-sa::before { background: #7C3AED; }
+
     .pill-anggota {
       background: rgba(3,105,161,.09);
       color: #0C4A6E;
@@ -721,23 +896,23 @@
 
 <!-- ── STATS BAR ── -->
 <div class="stats-bar">
-  <div class="stat-item">
+  <div class="stat-item" onclick="showProkerList('Research and Development')" title="Klik untuk melihat Proker R&D">
     <span class="stat-dot div-rnd"></span>
-    <span>Research & Development <strong id="cnt-rnd">—</strong></span>
+    <span>Research &amp; Development <strong id="cnt-rnd">—</strong></span>
   </div>
-  <div class="stat-item">
+  <div class="stat-item" onclick="showProkerList('Community Development')" title="Klik untuk melihat Proker ComDev">
     <span class="stat-dot div-comdev"></span>
     <span>Community Development <strong id="cnt-comdev">—</strong></span>
   </div>
-  <div class="stat-item">
+  <div class="stat-item" onclick="showProkerList('Human Resource Development')" title="Klik untuk melihat Proker HRD">
     <span class="stat-dot div-hrd"></span>
     <span>Human Resource Development <strong id="cnt-hrd">—</strong></span>
   </div>
-  <div class="stat-item">
+  <div class="stat-item" onclick="showProkerList('Public Relations')" title="Klik untuk melihat Proker PR">
     <span class="stat-dot div-pr"></span>
     <span>Public Relations <strong id="cnt-pr">—</strong></span>
   </div>
-    <div class="stat-item">
+  <div class="stat-item" title="Pengurus Inti tidak memiliki Proker">
     <span class="stat-dot div-pi"></span>
     <span>Pengurus Inti <strong id="cnt-pi">—</strong></span>
   </div>
@@ -808,6 +983,12 @@
         <div class="pills" id="mKoorProker"></div>
       </div>
 
+       <!-- Staf Ahli Divisi Proker -->
+      <div class="proker-section" style="margin-top:18px;">
+        <div class="proker-label" style="color: #6D28D9;">◈ Staf Ahli Divisi Proker</div>
+        <div class="pills" id="mStafAhliProker"></div>
+      </div>
+
       <!-- Anggota Proker -->
       <div class="proker-section" style="margin-top:18px;">
         <div class="proker-label" style="color: #0C4A6E;">◉ Anggota Proker</div>
@@ -820,6 +1001,20 @@
 <footer class="footer">
   HRIS SINERA &nbsp;·&nbsp; Data diperbarui dari dokumen resmi kepengurusan &nbsp;·&nbsp; Confidential
 </footer>
+
+<!-- ── PROKER MODAL ── -->
+<div id="prokerModalOverlay" role="dialog" aria-modal="true" aria-label="Daftar Program Kerja">
+  <div id="prokerModal">
+    <div class="pm-header">
+      <!-- Tombol kembali ke daftar proker (hanya muncul di halaman detail) -->
+      <button class="pm-back" id="pmBack" onclick="pmGoBack()">‹ Kembali</button>
+      <button class="pm-close" id="pmClose" onclick="closeProkerModal()" aria-label="Tutup">✕</button>
+      <div class="pm-eyebrow" id="pmEyebrow"></div>
+      <div class="pm-title"   id="pmTitle"></div>
+    </div>
+    <div class="pm-body" id="pmBody"></div>
+  </div>
+</div>
 
 <script src="data.js"></script>
 <script>
@@ -1091,6 +1286,7 @@ function openModal(m) {
 
   buildPills('mPjProker',      m.pj_proker,      'pill-pj');
   buildPills('mKoorProker',    m.koor_proker,     'pill-koor');
+  buildPills('mStafAhliProker', m.stafahli_proker, 'pill-sa');
   buildPills('mAnggotaProker', m.anggota_proker,  'pill-anggota');
 
   overlay.classList.add('open');
@@ -1114,6 +1310,134 @@ function closeModal() {
 modalClose.addEventListener('click', closeModal);
 overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── PROKER MODAL ─────────────────────────────────────────────────────────────
+
+// Data baku proker per divisi
+const PROKER_MAP = {
+  'Research and Development':   ['PRP', 'LSF', 'SP'],
+  'Community Development':      ['PPKO', 'SAPA', 'SICARE', 'PM'],
+  'Human Resource Development': ['SWF', 'ASF', 'RC', 'SERASI', 'SR'],
+  'Public Relations':           ['Kunjungan Edukasi', 'Publikasi Sosial Media', 'SCCA', 'SOH'],
+};
+
+// Emoji ikon tiap proker (opsional, bisa diubah)
+const PROKER_ICON = {
+  PRP: '📋', LSF: '📚', SP: '🔬',
+  PPKO: '🤝', SAPA: '👋', SICARE: '💛', PM: '🌱',
+  SWF: '✨', ASF: '🏅', RC: '🎗️', SERASI: '🧩', SR: '🎤',
+  'Kunjungan Edukasi': '🏫', 'Publikasi Sosial Media': '📣', SCCA: '🎨', SOH: '🌟',
+};
+
+// Peran yang dicek di allMembers, urutan tampil: PJ → Koor → Anggota
+const PERAN_CONFIG = [
+  { key: 'pj_proker',      label: 'Penanggung Jawab (PJ)', dot: '#B91C1C', cls: 'pill-pj'      },
+  { key: 'koor_proker',    label: 'Koordinator Divisi',    dot: '#4338CA', cls: 'pill-koor'    },
+  { key: 'anggota_proker', label: 'Anggota',               dot: '#0369A1', cls: 'pill-anggota' },
+];
+
+// State internal modal proker
+let _pmCurrentDivisi = '';
+
+const pmOverlay = document.getElementById('prokerModalOverlay');
+const pmBack    = document.getElementById('pmBack');
+const pmEyebrow = document.getElementById('pmEyebrow');
+const pmTitle   = document.getElementById('pmTitle');
+const pmBody    = document.getElementById('pmBody');
+
+/**
+ * showProkerList(divisiName)
+ * Dipanggil dari onclick di stats bar.
+ * Menampilkan grid tombol-tombol proker untuk divisi yang dipilih.
+ */
+function showProkerList(divisiName) {
+  _pmCurrentDivisi = divisiName;
+  const prokers = PROKER_MAP[divisiName] || [];
+  const dc = divisiClass(divisiName);
+
+  pmEyebrow.textContent = 'Program Kerja';
+  pmTitle.textContent   = divisiShort(divisiName) + ' · ' + divisiName;
+  pmBack.classList.remove('visible');
+
+  if (prokers.length === 0) {
+    pmBody.innerHTML = `<div class="pm-empty">Tidak ada proker terdaftar untuk divisi ini.</div>`;
+  } else {
+    pmBody.innerHTML = `<div class="proker-grid">${
+      prokers.map(p => `
+        <button class="proker-btn" onclick="showProkerDetail('${p.replace(/'/g,"\\'")}')">
+          <span class="proker-btn-icon">${PROKER_ICON[p] || '📌'}</span>${p}
+        </button>`).join('')
+    }</div>`;
+  }
+
+  pmOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+/**
+ * showProkerDetail(prokerName)
+ * Dipanggil saat tombol proker diklik.
+ * Filter allMembers → tampilkan PJ, Koor, Anggota untuk proker tersebut.
+ */
+function showProkerDetail(prokerName) {
+  pmEyebrow.textContent = _pmCurrentDivisi ? divisiShort(_pmCurrentDivisi) + ' › Proker' : 'Proker';
+  pmTitle.textContent   = prokerName;
+  pmBack.classList.add('visible');
+
+  let hasAnyone = false;
+  let html = '';
+
+  PERAN_CONFIG.forEach(({ key, label, dot }) => {
+    // Cari semua anggota yang punya prokerName di array key-nya
+    const found = allMembers.filter(m =>
+      Array.isArray(m[key]) && m[key].some(p => p.toLowerCase() === prokerName.toLowerCase())
+    );
+    if (found.length === 0) return;
+    hasAnyone = true;
+
+    html += `
+      <div class="peran-group">
+        <div class="peran-label">
+          <span class="peran-dot" style="background:${dot}"></span>${label}
+        </div>
+        ${found.map(m => {
+          const dc = divisiClass(m.divisi);
+          return `
+          <div class="mini-member" onclick="closeProkerModal(); setTimeout(()=>openModal(${JSON.stringify(m).replace(/</g,'&lt;')}),180)">
+            <div class="mini-avatar div-${dc}">${initials(m.nama)}</div>
+            <div>
+              <div class="mini-name">${m.nama}</div>
+              <div class="mini-sub">${m.jabatan} · ${m.angkatan}</div>
+            </div>
+            <span class="mini-arrow">›</span>
+          </div>`;
+        }).join('')}
+      </div>`;
+  });
+
+  if (!hasAnyone) {
+    html = `<div class="pm-empty">Belum ada anggota yang terdaftar di proker <strong>${prokerName}</strong>.</div>`;
+  }
+
+  pmBody.innerHTML = html;
+}
+
+/** Kembali ke daftar proker divisi */
+function pmGoBack() {
+  if (_pmCurrentDivisi) showProkerList(_pmCurrentDivisi);
+}
+
+/** Tutup proker modal */
+function closeProkerModal() {
+  pmOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Tutup dengan klik backdrop atau Escape
+pmOverlay.addEventListener('click', e => { if (e.target === pmOverlay) closeProkerModal(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && pmOverlay.classList.contains('open')) closeProkerModal();
+});
 
 // ── INIT ─────────────────────────────────────────────────────────────────────
 loadData();
