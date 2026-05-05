@@ -457,6 +457,84 @@
 
     .pm-empty { text-align:center; padding:28px 0; color:var(--text-muted); font-size:13px; }
 
+    /* ── TOMBOL MODE TABEL ── */
+    .pm-toolbar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 16px;
+    }
+    .btn-mode {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 8px;
+      border: 1.5px solid var(--cream-dark);
+      background: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: border-color .15s, color .15s, background .15s;
+    }
+    .btn-mode:hover, .btn-mode.active {
+      border-color: var(--gold);
+      color: var(--navy);
+      background: rgba(200,150,62,.08);
+    }
+
+    /* ── MODE TABEL PROKER ── */
+    .proker-table-wrap {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid var(--cream-dark);
+    }
+    .proker-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      min-width: 480px;
+    }
+    .proker-table thead th {
+      background: var(--navy);
+      color: rgba(255,255,255,.75);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 10px 12px;
+      text-align: left;
+      white-space: nowrap;
+    }
+    .proker-table thead th:first-child { border-radius: 11px 0 0 0; }
+    .proker-table thead th:last-child  { border-radius: 0 11px 0 0; }
+    .proker-table tbody tr { border-bottom: 1px solid var(--cream-dark); }
+    .proker-table tbody tr:last-child { border-bottom: none; }
+    .proker-table tbody tr:hover { background: rgba(200,150,62,.05); }
+    .proker-table td {
+      padding: 10px 12px;
+      vertical-align: top;
+      color: var(--text-dark);
+    }
+    .proker-table td:first-child {
+      font-weight: 700;
+      white-space: nowrap;
+      color: var(--navy);
+    }
+    /* Nama yang bisa diklik di tabel & detail proker */
+    .member-link {
+      display: inline-block;
+      color: var(--text-dark);
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 1px dashed var(--text-light);
+      line-height: 1.6;
+      transition: color .12s, border-color .12s;
+    }
+    .member-link:hover { color: var(--gold); border-color: var(--gold); }
+    .tbl-empty { color: var(--text-light); font-style: italic; font-size: 11px; }
+
     /* ── MAIN CONTENT ── */
     .main {
       max-width: 900px;
@@ -1329,11 +1407,12 @@ const PROKER_ICON = {
   'Kunjungan Edukasi': '🏫', 'Publikasi Sosial Media': '📣', SCCA: '🎨', SOH: '🌟',
 };
 
-// Peran yang dicek di allMembers, urutan tampil: PJ → Koor → Anggota
+// Peran yang dicek di allMembers, urutan tampil: PJ → Koor → SA → Anggota
 const PERAN_CONFIG = [
-  { key: 'pj_proker',      label: 'Penanggung Jawab (PJ)', dot: '#B91C1C', cls: 'pill-pj'      },
-  { key: 'koor_proker',    label: 'Koordinator Divisi',    dot: '#4338CA', cls: 'pill-koor'    },
-  { key: 'anggota_proker', label: 'Anggota',               dot: '#0369A1', cls: 'pill-anggota' },
+  { key: 'pj_proker',       label: 'Penanggung Jawab (PJ)', dot: '#B91C1C', cls: 'pill-pj'      },
+  { key: 'koor_proker',     label: 'Koordinator Divisi',    dot: '#4338CA', cls: 'pill-koor'    },
+  { key: 'stafahli_proker', label: 'Staf Ahli Divisi',      dot: '#7C3AED', cls: 'pill-sa'      },
+  { key: 'anggota_proker',  label: 'Anggota',               dot: '#0369A1', cls: 'pill-anggota' },
 ];
 
 // State internal modal proker
@@ -1353,7 +1432,6 @@ const pmBody    = document.getElementById('pmBody');
 function showProkerList(divisiName) {
   _pmCurrentDivisi = divisiName;
   const prokers = PROKER_MAP[divisiName] || [];
-  const dc = divisiClass(divisiName);
 
   pmEyebrow.textContent = 'Program Kerja';
   pmTitle.textContent   = divisiShort(divisiName) + ' · ' + divisiName;
@@ -1362,12 +1440,18 @@ function showProkerList(divisiName) {
   if (prokers.length === 0) {
     pmBody.innerHTML = `<div class="pm-empty">Tidak ada proker terdaftar untuk divisi ini.</div>`;
   } else {
-    pmBody.innerHTML = `<div class="proker-grid">${
-      prokers.map(p => `
-        <button class="proker-btn" onclick="showProkerDetail('${p.replace(/'/g,"\\'")}')">
-          <span class="proker-btn-icon">${PROKER_ICON[p] || '📌'}</span>${p}
-        </button>`).join('')
-    }</div>`;
+    pmBody.innerHTML = `
+      <div class="pm-toolbar">
+        <button class="btn-mode" id="btnModeTable" onclick="showProkerTable('${divisiName.replace(/'/g,"\\'")}')">
+          ⊞ Lihat Mode Tabel
+        </button>
+      </div>
+      <div class="proker-grid">${
+        prokers.map(p => `
+          <button class="proker-btn" onclick="showProkerDetail('${p.replace(/'/g,"\\'")}')">
+            <span class="proker-btn-icon">${PROKER_ICON[p] || '📌'}</span>${p}
+          </button>`).join('')
+      }</div>`;
   }
 
   pmOverlay.classList.add('open');
@@ -1376,8 +1460,8 @@ function showProkerList(divisiName) {
 
 /**
  * showProkerDetail(prokerName)
- * Dipanggil saat tombol proker diklik.
- * Filter allMembers → tampilkan PJ, Koor, Anggota untuk proker tersebut.
+ * Filter allMembers → tampilkan PJ, Koor, SA, Anggota untuk proker tersebut.
+ * Nama ditampilkan sebagai .member-link yang bisa diklik → buka profil.
  */
 function showProkerDetail(prokerName) {
   pmEyebrow.textContent = _pmCurrentDivisi ? divisiShort(_pmCurrentDivisi) + ' › Proker' : 'Proker';
@@ -1388,7 +1472,6 @@ function showProkerDetail(prokerName) {
   let html = '';
 
   PERAN_CONFIG.forEach(({ key, label, dot }) => {
-    // Cari semua anggota yang punya prokerName di array key-nya
     const found = allMembers.filter(m =>
       Array.isArray(m[key]) && m[key].some(p => p.toLowerCase() === prokerName.toLowerCase())
     );
@@ -1402,8 +1485,9 @@ function showProkerDetail(prokerName) {
         </div>
         ${found.map(m => {
           const dc = divisiClass(m.divisi);
+          // Gunakan data-nama untuk lookup aman — tidak ada JSON di onclick
           return `
-          <div class="mini-member" onclick="closeProkerModal(); setTimeout(()=>openModal(${JSON.stringify(m).replace(/</g,'&lt;')}),180)">
+          <div class="mini-member" data-nama="${m.nama.replace(/"/g,'&quot;')}" onclick="openMemberByName(this.dataset.nama)">
             <div class="mini-avatar div-${dc}">${initials(m.nama)}</div>
             <div>
               <div class="mini-name">${m.nama}</div>
@@ -1420,6 +1504,70 @@ function showProkerDetail(prokerName) {
   }
 
   pmBody.innerHTML = html;
+}
+
+/**
+ * openMemberByName(nama)
+ * Cari anggota di allMembers berdasarkan nama (exact match, case-insensitive),
+ * tutup proker modal lalu buka modal profil anggota.
+ */
+function openMemberByName(nama) {
+  const m = allMembers.find(x => x.nama.toLowerCase() === nama.toLowerCase());
+  if (!m) return;
+  closeProkerModal();
+  // Delay kecil agar animasi tutup selesai sebelum modal profil muncul
+  setTimeout(() => openModal(m), 200);
+}
+
+/**
+ * showProkerTable(divisiName)
+ * Render tampilan tabel dengan kolom: Nama Proker | PJ | Koor | SA | Anggota.
+ * Semua nama di dalam sel bisa diklik untuk membuka profil.
+ */
+function showProkerTable(divisiName) {
+  const prokers = PROKER_MAP[divisiName] || [];
+
+  pmEyebrow.textContent = 'Mode Tabel';
+  pmTitle.textContent   = divisiShort(divisiName) + ' · Semua Proker';
+  pmBack.classList.add('visible');
+
+  // Helper: ambil nama-nama dari allMembers untuk proker+key tertentu
+  function getNamas(prokerName, key) {
+    return allMembers
+      .filter(m => Array.isArray(m[key]) && m[key].some(p => p.toLowerCase() === prokerName.toLowerCase()))
+      .map(m => `<span class="member-link" data-nama="${m.nama.replace(/"/g,'&quot;')}" onclick="openMemberByName(this.dataset.nama)">${m.nama}</span>`)
+      .join('<br>') || `<span class="tbl-empty">—</span>`;
+  }
+
+  const rows = prokers.map(p => `
+    <tr>
+      <td>${PROKER_ICON[p] || '📌'} ${p}</td>
+      <td>${getNamas(p, 'pj_proker')}</td>
+      <td>${getNamas(p, 'koor_proker')}</td>
+      <td>${getNamas(p, 'stafahli_proker')}</td>
+      <td>${getNamas(p, 'anggota_proker')}</td>
+    </tr>`).join('');
+
+  pmBody.innerHTML = `
+    <div class="pm-toolbar">
+      <button class="btn-mode active" onclick="showProkerList('${divisiName.replace(/'/g,"\\'")}')">
+        ⊞ Kembali ke Grid
+      </button>
+    </div>
+    <div class="proker-table-wrap">
+      <table class="proker-table">
+        <thead>
+          <tr>
+            <th>Nama Proker</th>
+            <th>⚑ PJ</th>
+            <th>◈ Koor Divisi</th>
+            <th>◈ Staf Ahli</th>
+            <th>◉ Anggota</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
 }
 
 /** Kembali ke daftar proker divisi */
