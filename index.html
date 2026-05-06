@@ -13,11 +13,11 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:       #0A1628;
-      --navy-mid:   #112240;
-      --navy-soft:  #1A3158;
-      --gold:       #C8963E;
-      --gold-light: #E8B86D;
+      --navy:       #2d4a73;
+      --navy-mid:   #446ca0;
+      --navy-soft:  #5a82b8;
+      --gold:       #f4dc11;
+      --gold-light: #f9ec5a;
       --cream:      #F8F4EE;
       --cream-dark: #EDE7DB;
       --white:      #FFFFFF;
@@ -965,13 +965,202 @@
       .modal-header { padding: 24px 20px 22px; }
       .stats-bar { gap: 16px; }
     }
+
+    /* ── ADMIN FEATURE STYLES ── */
+    /* Tombol gembok di header */
+    #adminLockBtn {
+      position: absolute;
+      top: 18px; right: 18px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.20);
+      border-radius: 50%;
+      width: 38px; height: 38px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px;
+      transition: background .15s, border-color .15s;
+      z-index: 10;
+    }
+    #adminLockBtn:hover { background: rgba(200,150,62,.25); border-color: var(--gold); }
+    #adminLockBtn.logged-in { background: rgba(200,150,62,.22); border-color: var(--gold); }
+
+    /* Tombol Download Backup */
+    #btnDownloadBackup {
+      display: none;
+      position: absolute;
+      top: 18px; right: 68px;
+      background: rgba(200,150,62,.18);
+      border: 1px solid rgba(200,150,62,.45);
+      border-radius: 20px;
+      padding: 7px 14px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px; font-weight: 600;
+      color: var(--gold-light);
+      white-space: nowrap;
+      transition: background .15s, color .15s;
+      z-index: 10;
+    }
+    #btnDownloadBackup:hover { background: rgba(200,150,62,.35); color: var(--white); }
+    #btnDownloadBackup.visible { display: flex; align-items: center; gap: 6px; }
+
+    /* Modal Login */
+    #loginModalOverlay {
+      position: fixed; inset: 0;
+      background: rgba(10,22,40,.75);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .2s;
+    }
+    #loginModalOverlay.open { opacity: 1; pointer-events: all; }
+    #loginModal {
+      background: var(--white);
+      border-radius: 20px;
+      max-width: 380px; width: 100%;
+      box-shadow: var(--shadow-lg);
+      transform: scale(.94) translateY(16px);
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+      overflow: hidden;
+    }
+    #loginModalOverlay.open #loginModal { transform: scale(1) translateY(0); }
+    .login-header {
+      background: var(--navy);
+      padding: 28px 28px 22px;
+      border-radius: 20px 20px 0 0;
+      position: relative;
+    }
+    .login-header::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 100% 0%, rgba(200,150,62,.22) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .login-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; color: var(--white); position: relative;
+    }
+    .login-header p {
+      font-size: 12px; color: rgba(255,255,255,.5); margin-top: 4px; position: relative;
+    }
+    .login-body { padding: 24px 28px 28px; }
+    .login-field { margin-bottom: 16px; }
+    .login-field label {
+      display: block; font-size: 11px; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 6px;
+    }
+    .login-field input {
+      width: 100%; padding: 12px 14px;
+      border: 1.5px solid var(--cream-dark);
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif; font-size: 14px;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .login-field input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(200,150,62,.15);
+    }
+    #loginError {
+      font-size: 12px; color: #DC2626;
+      background: rgba(220,38,38,.08);
+      border: 1px solid rgba(220,38,38,.20);
+      border-radius: 8px; padding: 8px 12px;
+      margin-bottom: 14px; display: none;
+    }
+    .login-actions { display: flex; gap: 10px; }
+    .btn-login-submit {
+      flex: 1; padding: 12px;
+      background: var(--navy); color: var(--white);
+      border: none; border-radius: 10px;
+      font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: background .15s;
+    }
+    .btn-login-submit:hover { background: var(--navy-soft); }
+    .btn-login-cancel {
+      padding: 12px 18px;
+      background: var(--cream); color: var(--text-muted);
+      border: 1.5px solid var(--cream-dark); border-radius: 10px;
+      font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: background .15s;
+    }
+    .btn-login-cancel:hover { background: var(--cream-dark); }
+
+    /* Tombol Edit di Modal Anggota */
+    #btnEditData {
+      display: none;
+      margin: 0 28px 20px;
+      padding: 10px 18px;
+      background: rgba(200,150,62,.12);
+      border: 1.5px solid rgba(200,150,62,.40);
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+      color: var(--gold);
+      cursor: pointer;
+      width: calc(100% - 56px);
+      transition: background .15s, border-color .15s;
+    }
+    #btnEditData:hover { background: rgba(200,150,62,.22); border-color: var(--gold); }
+    #btnEditData.visible { display: block; }
+
+    /* Mode Edit: input fields di dalam modal */
+    .edit-input {
+      width: 100%; padding: 8px 10px;
+      border: 1.5px solid var(--gold);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif; font-size: 13px;
+      color: var(--text-dark);
+      background: rgba(200,150,62,.05);
+      outline: none; resize: vertical;
+      transition: box-shadow .2s;
+    }
+    .edit-input:focus { box-shadow: 0 0 0 3px rgba(200,150,62,.15); }
+    .edit-hint {
+      font-size: 10px; color: var(--text-muted);
+      margin-top: 4px; font-style: italic;
+    }
+
+    /* Tombol Simpan Perubahan */
+    #btnSaveEdit {
+      display: none;
+      margin: 0 28px 24px;
+      padding: 11px;
+      background: var(--navy); color: var(--white);
+      border: none; border-radius: 10px;
+      font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+      cursor: pointer; width: calc(100% - 56px);
+      transition: background .15s;
+    }
+    #btnSaveEdit:hover { background: var(--navy-soft); }
+    #btnSaveEdit.visible { display: block; }
+    #saveSuccessMsg {
+      display: none;
+      margin: 0 28px 16px;
+      padding: 8px 14px;
+      background: rgba(5,150,105,.10);
+      border: 1px solid rgba(5,150,105,.25);
+      border-radius: 8px;
+      font-size: 12px; color: #065F46; font-weight: 600;
+    }
+    #saveSuccessMsg.visible { display: block; }
   </style>
 </head>
 <body>
 
 <!-- ── HERO ── -->
-<header class="hero">
+<header class="hero" style="position:relative;">
   <div class="hero-grid"></div>
+
+  <!-- ADMIN: Tombol Download Backup (hanya muncul saat login) -->
+  <button id="btnDownloadBackup" title="Download file data.js terbaru" onclick="downloadBackupJS()">
+    💾 Download Backup JS
+  </button>
+  <!-- ADMIN: Tombol Gembok Login -->
+  <button id="adminLockBtn" title="Login Admin" onclick="openLoginModal()">🔒</button>
+
   <div class="hero-badge">Sistem Informasi Internal</div>
   <h1>HRIS <span>Kepengurusan</span><br>Sinergi Riset Pengabdian dan Dakwah Mahasiswa</h1>
   <p class="hero-sub">Human Resource Information System · Cari anggota pengurus berdasarkan nama</p>
@@ -1072,6 +1261,11 @@
     </div>
 
     <div class="modal-body">
+      <!-- ADMIN: Tombol Edit & Simpan (hanya muncul saat isAdmin = true) -->
+      <button id="btnEditData" onclick="enterEditMode()">✏️ Edit Data Anggota Ini</button>
+      <div id="saveSuccessMsg">✅ Perubahan berhasil disimpan ke memori!</div>
+      <button id="btnSaveEdit" onclick="saveEditData()">💾 Simpan Perubahan</button>
+
       <div class="info-grid">
         <div class="info-item">
           <div class="info-label">NIM</div>
@@ -1174,6 +1368,31 @@
   </div>
 </div>
 
+<!-- ── MODAL LOGIN ADMIN ── -->
+<div id="loginModalOverlay" role="dialog" aria-modal="true">
+  <div id="loginModal">
+    <div class="login-header">
+      <h2>🔐 Login Admin</h2>
+      <p>Masukkan kredensial untuk mengaktifkan mode edit.</p>
+    </div>
+    <div class="login-body">
+      <div id="loginError">Username atau password salah. Coba lagi.</div>
+      <div class="login-field">
+        <label>Username</label>
+        <input type="text" id="loginUser" placeholder="admin" autocomplete="off" />
+      </div>
+      <div class="login-field">
+        <label>Password</label>
+        <input type="password" id="loginPass" placeholder="••••••••" />
+      </div>
+      <div class="login-actions">
+        <button class="btn-login-submit" onclick="doLogin()">Masuk</button>
+        <button class="btn-login-cancel" onclick="closeLoginModal()">Batal</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <footer class="footer">
   HRIS SINERA &nbsp;·&nbsp; Data diperbarui dari dokumen resmi kepengurusan &nbsp;·&nbsp; Confidential
 </footer>
@@ -1228,6 +1447,12 @@ function highlight(text, query) {
   if (!query) return text;
   const re = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
   return text.replace(re, '<mark style="background:rgba(200,150,62,.28);color:inherit;border-radius:3px;">$1</mark>');
+}
+
+// ── NORMALISASI NAMA PROKER ───────────────────────────────────────────────────
+// Menghapus spasi dan lowercase agar "SI CARE" == "SICARE", "Sapa" == "SAPA", dst.
+function normalizeProker(p) {
+  return (p || '').toLowerCase().replace(/\s+/g, '');
 }
 
 let allMembers = membersData; // Mengambil data langsung dari variabel di data.js
@@ -1513,6 +1738,27 @@ const PERAN_CONFIG = [
   { key: 'anggota_proker',  label: 'Anggota',               dot: '#0369A1', cls: 'pill-anggota' },
 ];
 
+/**
+ * getMembersForDivision(divisiKey)
+ * Kembalikan semua anggota yang relevan untuk divisi:
+ *   a) Anggota yang memang berasal dari divisi tersebut, ATAU
+ *   b) Anggota dari divisi lain yang memiliki peran di salah satu proker divisi ini.
+ * Menggunakan normalizeProker() agar "SI CARE" ≡ "SICARE", "Sapa" ≡ "SAPA", dst.
+ */
+function getMembersForDivision(divisiKey) {
+  const prokers = (PROKER_MAP[divisiKey] || []).map(normalizeProker);
+  return allMembers.filter(m => {
+    if (m.divisi === divisiKey) return true;
+    const roles = [
+      ...(m.pj_proker       || []),
+      ...(m.koor_proker     || []),
+      ...(m.stafahli_proker || []),
+      ...(m.anggota_proker  || []),
+    ];
+    return roles.some(p => prokers.includes(normalizeProker(p)));
+  });
+}
+
 // State internal modal proker
 let _pmCurrentDivisi = '';
 
@@ -1572,7 +1818,7 @@ function showProkerDetail(prokerName) {
 
   PERAN_CONFIG.forEach(({ key, label, dot }) => {
     const found = allMembers.filter(m =>
-      Array.isArray(m[key]) && m[key].some(p => p.toLowerCase() === prokerName.toLowerCase())
+      Array.isArray(m[key]) && m[key].some(p => normalizeProker(p) === normalizeProker(prokerName))
     );
     if (found.length === 0) return;
     hasAnyone = true;
@@ -1635,9 +1881,15 @@ function openMemberByName(nama) {
 function showProkerTable(divisiName) {
   // Urutkan: Koordinator → Staf Ahli → Anggota
   const ORDER = ['Koordinator', 'Staf Ahli', 'Anggota'];
+  // ✅ Filter ketat: hanya anggota yang berasal dari divisi ini saja.
+  // Pengurus lintas divisi hanya tampil di Pemetaan Sumber Daya global.
   const members = allMembers
     .filter(m => m.divisi === divisiName)
-    .sort((a, b) => ORDER.indexOf(a.jabatan) - ORDER.indexOf(b.jabatan));
+    .sort((a, b) => {
+      const ai = ORDER.indexOf(a.jabatan);
+      const bi = ORDER.indexOf(b.jabatan);
+      return ai - bi;
+    });
 
   pmEyebrow.textContent = 'Mode Tabel';
   pmTitle.textContent   = divisiShort(divisiName) + ' · Beban Kerja Anggota';
@@ -1658,6 +1910,11 @@ function showProkerTable(divisiName) {
     const jabClass = jabatanClass(m.jabatan);
     const totalBeban = (m.pj_proker?.length || 0) + (m.koor_proker?.length || 0)
                      + (m.stafahli_proker?.length || 0) + (m.anggota_proker?.length || 0);
+    // Badge ekstra jika anggota dari divisi lain (lintas divisi)
+    const crossDivBadge = m.divisi !== divisiName
+      ? `<span style="font-size:10px;background:rgba(200,150,62,.12);color:var(--gold);
+          border:1px solid rgba(200,150,62,.3);border-radius:4px;padding:1px 6px;margin-left:4px;">
+          ${divisiShort(m.divisi)}</span>` : '';
     return `
       <tr style="border-bottom:1px solid var(--cream-dark);">
         <td style="padding:11px 14px;white-space:nowrap;">
@@ -1666,13 +1923,14 @@ function showProkerTable(divisiName) {
               justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;
               font-family:'Playfair Display',serif;" class="div-${dc}">${initials(m.nama)}</div>
             <div>
-              <div style="font-weight:600;font-size:13px;color:var(--navy);cursor:pointer;
-                border-bottom:1px dashed var(--text-light);"
-                data-nama="${m.nama.replace(/"/g,'&quot;')}"
-                onclick="openMemberByName(this.dataset.nama)"
-                onmouseover="this.style.color='var(--gold)';this.style.borderColor='var(--gold)';"
-                onmouseout="this.style.color='var(--navy)';this.style.borderColor='var(--text-light)';">
-                ${m.nama}
+              <div style="display:flex;align-items:center;flex-wrap:wrap;gap:2px;">
+                <span style="font-weight:600;font-size:13px;color:var(--navy);cursor:pointer;
+                  border-bottom:1px dashed var(--text-light);"
+                  data-nama="${m.nama.replace(/"/g,'&quot;')}"
+                  onclick="openMemberByName(this.dataset.nama)"
+                  onmouseover="this.style.color='var(--gold)';this.style.borderColor='var(--gold)';"
+                  onmouseout="this.style.color='var(--navy)';this.style.borderColor='var(--text-light)';">
+                  ${m.nama}</span>${crossDivBadge}
               </div>
               <div style="display:flex;align-items:center;gap:5px;margin-top:3px;">
                 <span class="badge-sm ${jabClass}" style="font-size:10px;padding:1px 7px;">${m.jabatan}</span>
@@ -1698,7 +1956,7 @@ function showProkerTable(divisiName) {
       <table class="proker-table" style="min-width:620px;">
         <thead>
           <tr>
-            <th style="min-width:180px;">Nama Anggota Divisi</th>
+            <th style="min-width:200px;">Nama Anggota Divisi</th>
             <th>⚑ PJ Proker</th>
             <th>◈ Koor Divisi Proker</th>
             <th>◈ Staf Ahli Divisi</th>
@@ -1796,45 +2054,50 @@ function switchPemetaanTab(divisiKey) {
 }
 
 function renderPemetaanTable(divisiKey) {
-  const members = allMembers.filter(m => m.divisi === divisiKey);
   const prokers = PROKER_MAP[divisiKey] || [];
 
-  // Find coordinator (jabatan=Koordinator), staf ahli (jabatan=Staf Ahli) of the division
-  const koorDiv   = members.filter(m => m.jabatan === 'Koordinator');
-  const stafDiv   = members.filter(m => m.jabatan === 'Staf Ahli');
-  const anggDiv   = members.filter(m => m.jabatan === 'Anggota');
+  // Anggota ASLI divisi (untuk info bar summary)
+  const nativeMembers = allMembers.filter(m => m.divisi === divisiKey);
+  const koorDiv = nativeMembers.filter(m => m.jabatan === 'Koordinator');
+  const stafDiv = nativeMembers.filter(m => m.jabatan === 'Staf Ahli');
 
   const divConf = PEMETAAN_DIVISI.find(d => d.key === divisiKey);
   const accent  = divConf ? divConf.color : 'var(--gold)';
 
-  // Helper: get members by proker + role key
+  // ✅ FIX: byProkerRole cari dari SEMUA anggota (bukan hanya divisi ini)
+  //         dan gunakan normalizeProker agar "SI CARE" ≡ "SICARE" dll.
   function byProkerRole(prokerName, roleKey) {
-    return members.filter(m =>
+    return allMembers.filter(m =>
       Array.isArray(m[roleKey]) &&
-      m[roleKey].some(p => p.toLowerCase() === prokerName.toLowerCase())
+      m[roleKey].some(p => normalizeProker(p) === normalizeProker(prokerName))
     );
   }
 
-  // Helper: render member link in table
+  // Helper: render link nama anggota (bisa diklik → buka profil)
   function memberLinks(arr) {
     if (!arr || arr.length === 0) return '<span style="color:var(--text-light);font-style:italic;font-size:11px;">—</span>';
-    return arr.map(m =>
-      `<span style="display:inline-block;cursor:pointer;color:var(--text-dark);font-weight:500;
-        border-bottom:1px dashed var(--text-light);line-height:1.8;font-size:12px;
-        transition:color .12s;margin-right:4px;"
-        onmouseover="this.style.color='var(--gold)';this.style.borderColor='var(--gold)';"
-        onmouseout="this.style.color='var(--text-dark)';this.style.borderColor='var(--text-light)';"
-        data-nama="${m.nama.replace(/"/g,'&quot;')}"
-        onclick="pemetaanOpenMember(this.dataset.nama)">${m.nama}</span>`
-    ).join('<br>');
+    return arr.map(m => {
+      // Badge kecil jika dari divisi lain
+      const crossBadge = m.divisi !== divisiKey
+        ? ` <span style="font-size:10px;background:rgba(200,150,62,.12);color:var(--gold);
+              border:1px solid rgba(200,150,62,.3);border-radius:4px;padding:0 5px;">${divisiShort(m.divisi)}</span>`
+        : '';
+      return `<span style="display:inline-flex;align-items:center;gap:3px;cursor:pointer;
+          color:var(--text-dark);font-weight:500;border-bottom:1px dashed var(--text-light);
+          line-height:1.8;font-size:12px;transition:color .12s;margin-right:4px;"
+          onmouseover="this.style.color='var(--gold)';this.style.borderColor='var(--gold)';"
+          onmouseout="this.style.color='var(--text-dark)';this.style.borderColor='var(--text-light)';"
+          data-nama="${m.nama.replace(/"/g,'&quot;')}"
+          onclick="pemetaanOpenMember(this.dataset.nama)">${m.nama}${crossBadge}</span>`;
+    }).join('<br>');
   }
 
-  // Build rows: one row per proker
+  // Baris per proker
   const prokerRows = prokers.map(p => {
-    const pj    = byProkerRole(p, 'pj_proker');
-    const koor  = byProkerRole(p, 'koor_proker');
-    const sa    = byProkerRole(p, 'stafahli_proker');
-    const ang   = byProkerRole(p, 'anggota_proker');
+    const pj   = byProkerRole(p, 'pj_proker');
+    const koor = byProkerRole(p, 'koor_proker');
+    const sa   = byProkerRole(p, 'stafahli_proker');
+    const ang  = byProkerRole(p, 'anggota_proker');
     return `
       <tr style="border-bottom: 1px solid var(--cream-dark);">
         <td style="padding:12px 14px;font-weight:700;color:var(--navy);white-space:nowrap;font-size:13px;">
@@ -1847,7 +2110,7 @@ function renderPemetaanTable(divisiKey) {
       </tr>`;
   }).join('');
 
-  // Division info summary row
+  // Info bar ringkasan divisi
   const summaryHtml = `
     <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;align-items:center;">
       <div style="display:flex;align-items:center;gap:8px;">
@@ -1861,7 +2124,7 @@ function renderPemetaanTable(divisiKey) {
         ${stafDiv.map(m => m.nama).join(', ')} (Staf Ahli)
       </span>` : ''}
       <span style="margin-left:auto;font-size:12px;color:var(--text-muted);background:var(--cream-dark);padding:3px 10px;border-radius:999px;">
-        ${members.length} Anggota · ${prokers.length} Proker
+        ${nativeMembers.length} Anggota Inti · ${prokers.length} Proker
       </span>
     </div>`;
 
@@ -1874,7 +2137,7 @@ function renderPemetaanTable(divisiKey) {
               <th style="background:var(--navy);color:rgba(255,255,255,.75);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:11px 14px;text-align:left;white-space:nowrap;border-radius:11px 0 0 0;">Nama Proker</th>
               <th style="background:var(--navy);color:rgba(255,255,255,.75);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:11px 14px;text-align:left;white-space:nowrap;">⚑ PJ Proker</th>
               <th style="background:var(--navy);color:rgba(255,255,255,.75);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:11px 14px;text-align:left;white-space:nowrap;">◈ Koor Divisi Proker</th>
-              <th style="background:var(--navy);color:rgba(255,255,255,.75);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:11px 14px;text-align:left;white-space:nowrap;">◈ Staf Ahli Divisi</th>
+              <th style="background:var(--navy);color:rgba(255,255,255,.75);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:11px 14px;text-align:left;white-space:nowrap;">◈ Staf Ahli Divisi Proker</th>
               <th style="background:var(--navy);color:rgba(255,255,255,.75);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:11px 14px;text-align:left;white-space:nowrap;border-radius:0 11px 0 0;">◉ Anggota Proker</th>
             </tr>
           </thead>
@@ -1890,6 +2153,183 @@ function pemetaanOpenMember(nama) {
   if (!m) return;
   closePemetaan();
   setTimeout(() => openModal(m), 220);
+}
+
+// ── ADMIN: LOGIN & EDIT FEATURE ─────────────────────────────────────────────
+
+// Kredensial hardcode (ganti sesuai kebutuhan)
+const ADMIN_USER = 'admin';
+const ADMIN_PASS = 'sinera2026';
+
+// State global
+let isAdmin = false;
+let _editingMember = null; // referensi objek member yang sedang diedit
+
+// ── Login Modal ──────────────────────────────────────────────────────────────
+function openLoginModal() {
+  if (isAdmin) {
+    // Jika sudah login, klik gembok = logout
+    if (confirm('Anda sudah login sebagai admin. Keluar dari mode admin?')) {
+      doLogout();
+    }
+    return;
+  }
+  document.getElementById('loginUser').value = '';
+  document.getElementById('loginPass').value = '';
+  document.getElementById('loginError').style.display = 'none';
+  document.getElementById('loginModalOverlay').classList.add('open');
+}
+
+function closeLoginModal() {
+  document.getElementById('loginModalOverlay').classList.remove('open');
+}
+
+function doLogin() {
+  const u = document.getElementById('loginUser').value.trim();
+  const p = document.getElementById('loginPass').value;
+  if (u === ADMIN_USER && p === ADMIN_PASS) {
+    isAdmin = true;
+    closeLoginModal();
+    // Update tampilan tombol
+    const lockBtn = document.getElementById('adminLockBtn');
+    lockBtn.textContent = '🔓';
+    lockBtn.classList.add('logged-in');
+    lockBtn.title = 'Logout Admin';
+    document.getElementById('btnDownloadBackup').classList.add('visible');
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+
+function doLogout() {
+  isAdmin = false;
+  const lockBtn = document.getElementById('adminLockBtn');
+  lockBtn.textContent = '🔒';
+  lockBtn.classList.remove('logged-in');
+  lockBtn.title = 'Login Admin';
+  document.getElementById('btnDownloadBackup').classList.remove('visible');
+}
+
+// Enter via Enter key di input login
+document.getElementById('loginPass').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
+document.getElementById('loginUser').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('loginPass').focus();
+});
+document.getElementById('loginModalOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('loginModalOverlay')) closeLoginModal();
+});
+
+// ── Edit Mode di Modal Anggota ────────────────────────────────────────────────
+
+// Patch openModal: tampilkan tombol Edit jika isAdmin
+const _origOpenModal = openModal;
+openModal = function(m) {
+  _origOpenModal(m);
+  _editingMember = m;
+  // Reset mode edit
+  exitEditModeUI();
+  // Tampilkan tombol edit jika admin
+  const btnEdit = document.getElementById('btnEditData');
+  if (isAdmin) {
+    btnEdit.classList.add('visible');
+  } else {
+    btnEdit.classList.remove('visible');
+  }
+};
+
+function enterEditMode() {
+  if (!_editingMember) return;
+  const m = _editingMember;
+
+  // Sembunyikan tombol Edit, tampilkan Simpan
+  document.getElementById('btnEditData').classList.remove('visible');
+  document.getElementById('btnSaveEdit').classList.add('visible');
+  document.getElementById('saveSuccessMsg').classList.remove('visible');
+
+  // Ubah Divisi & Jabatan menjadi input
+  document.getElementById('mNim').innerHTML =
+    `<input class="edit-input" id="ei-nim" value="${m.nim || ''}" />`;
+  document.getElementById('mAngkatan').innerHTML =
+    `<input class="edit-input" id="ei-angkatan" value="${m.angkatan || ''}" />`;
+  document.getElementById('mProdi').innerHTML =
+    `<input class="edit-input" id="ei-prodi" value="${m.prodi || ''}" />`;
+
+  // Ubah pills proker menjadi textarea (nilai dipisah koma)
+  const prokerFields = [
+    { id: 'mPjProker',       key: 'pj_proker',       eid: 'ei-pj',      label: 'PJ Proker' },
+    { id: 'mKoorProker',     key: 'koor_proker',      eid: 'ei-koor',    label: 'Koor Proker' },
+    { id: 'mStafAhliProker', key: 'stafahli_proker',  eid: 'ei-sa',      label: 'Staf Ahli' },
+    { id: 'mAnggotaProker',  key: 'anggota_proker',   eid: 'ei-anggota', label: 'Anggota' },
+  ];
+
+  prokerFields.forEach(f => {
+    const val = (m[f.key] || []).join(', ');
+    document.getElementById(f.id).innerHTML =
+      `<textarea class="edit-input" id="${f.eid}" rows="2" placeholder="Pisahkan dengan koma, mis: PRP, SP">${val}</textarea>
+       <div class="edit-hint">Pisahkan nama proker dengan koma ( , )</div>`;
+  });
+}
+
+function exitEditModeUI() {
+  // Kembalikan tampilan ke view biasa (refresh isi modal dari _editingMember)
+  const m = _editingMember;
+  if (!m) return;
+  document.getElementById('mNim').textContent = m.nim || '—';
+  document.getElementById('mAngkatan').textContent = m.angkatan || '—';
+  document.getElementById('mProdi').textContent = m.prodi || '—';
+  buildPills('mPjProker',      m.pj_proker,      'pill-pj');
+  buildPills('mKoorProker',    m.koor_proker,     'pill-koor');
+  buildPills('mStafAhliProker', m.stafahli_proker, 'pill-sa');
+  buildPills('mAnggotaProker', m.anggota_proker,  'pill-anggota');
+  document.getElementById('btnSaveEdit').classList.remove('visible');
+  if (isAdmin) document.getElementById('btnEditData').classList.add('visible');
+}
+
+function saveEditData() {
+  if (!_editingMember) return;
+  const m = _editingMember;
+
+  // Baca nilai dari input
+  m.nim      = document.getElementById('ei-nim').value.trim();
+  m.angkatan = document.getElementById('ei-angkatan').value.trim();
+  m.prodi    = document.getElementById('ei-prodi').value.trim();
+
+  // Helper: parse textarea koma-separated menjadi array bersih
+  function parseArr(id) {
+    return document.getElementById(id).value
+      .split(',').map(s => s.trim()).filter(Boolean);
+  }
+
+  m.pj_proker       = parseArr('ei-pj');
+  m.koor_proker     = parseArr('ei-koor');
+  m.stafahli_proker = parseArr('ei-sa');
+  m.anggota_proker  = parseArr('ei-anggota');
+
+  // Update objek di array allMembers (sudah by-reference, tapi pastikan sinkron)
+  const idx = allMembers.findIndex(x => x.nama === m.nama && x.nim === m.nim || x === m);
+  if (idx !== -1) allMembers[idx] = m;
+
+  // Kembalikan ke tampilan view + tampilkan pesan sukses
+  exitEditModeUI();
+  const successEl = document.getElementById('saveSuccessMsg');
+  successEl.classList.add('visible');
+  setTimeout(() => successEl.classList.remove('visible'), 3000);
+}
+
+// ── Download Backup JS ────────────────────────────────────────────────────────
+function downloadBackupJS() {
+  const content = 'const membersData = ' + JSON.stringify(allMembers, null, 2) + ';';
+  const blob = new Blob([content], { type: 'text/javascript' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'data.js';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
 // ── INIT ─────────────────────────────────────────────────────────────────────
