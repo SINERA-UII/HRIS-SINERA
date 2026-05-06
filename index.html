@@ -457,7 +457,7 @@
 
     .pm-empty { text-align:center; padding:28px 0; color:var(--text-muted); font-size:13px; }
 
-    /* ── TOMBOL MODE TABEL ── */
+    /* ── TOMBOL PEMETAAN SDM DIVISI ── */
     .pm-toolbar {
       display: flex;
       justify-content: flex-end;
@@ -484,7 +484,7 @@
       background: rgba(200,150,62,.08);
     }
 
-    /* ── MODE TABEL PROKER ── */
+    /* ── PEMETAAN SDM PROKER ── */
     .proker-table-wrap {
       overflow-x: auto;
       border-radius: 12px;
@@ -1787,7 +1787,7 @@ function showProkerList(divisiName) {
     pmBody.innerHTML = `
       <div class="pm-toolbar">
         <button class="btn-mode" id="btnModeTable" onclick="showProkerTable('${divisiName.replace(/'/g,"\\'")}')">
-          ⊞ Lihat Mode Tabel
+          ⊞ Lihat Pemetaan SDM Divisi
         </button>
       </div>
       <div class="proker-grid">${
@@ -1848,7 +1848,7 @@ function showProkerDetail(prokerName) {
     html = `<div class="pm-empty">Belum ada anggota yang terdaftar di proker <strong>${prokerName}</strong>.</div>`;
   }
 
-  // Toolbar "Kembali ke Grid" — desain identik dengan tombol di Mode Tabel
+  // Toolbar "Kembali ke Grid" — desain identik dengan tombol di Pemetaan SDM Divisi
   const divisiEsc = (_pmCurrentDivisi || '').replace(/'/g, "\\'");
   pmBody.innerHTML = `
     <div class="pm-toolbar">
@@ -1891,7 +1891,7 @@ function showProkerTable(divisiName) {
       return ai - bi;
     });
 
-  pmEyebrow.textContent = 'Mode Tabel';
+  pmEyebrow.textContent = 'Pemetaan SDM Divisi';
   pmTitle.textContent   = divisiShort(divisiName) + ' · Beban Kerja Anggota';
   pmBack.classList.remove('visible');
 
